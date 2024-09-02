@@ -1,0 +1,616 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>List</title>
+	<link href="https://unpkg.com/tabulator-tables@4.9.3/dist/css/tabulator.min.css" rel="stylesheet">
+	<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.9.3/dist/js/tabulator.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js" integrity="sha512-PEsccDx9jqX6Dh4wZDCnWMaIO3gAaU0j46W//sSqQhUQxky6/eHZyeB3NrXD2xsyugAKd4KPiDANkcuoEa2JuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="manifest" href="manifest.webmanifest">
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<style>
+h2:after,
+.cards .card:after {
+  position: absolute;
+}
+
+h2,
+h2 strong,
+.cards .card
+{
+  position: relative;
+}
+
+h2,
+h2 strong,
+h2 span {
+  vertical-align: middle;
+}
+
+body {
+  background: #24282f;
+  font-family: 'Arial';
+  color: #ccc;
+  font-size: 16px
+}
+
+.wrapper {
+  padding: 15px;
+}
+
+h2 {
+  padding: 10px;
+  padding-left: 25px;
+  color: #ccc;
+  margin: 0;
+  cursor:pointer;
+}
+
+h2 strong {
+  z-index: 2;
+  background: #24282f;
+  padding: 4px 8px;
+}
+
+h2 span {
+  font-size: 0.7em;
+  color: #aaa;
+  margin-left: 10px;
+}
+
+h2:after {
+  content: '';
+  z-index: 1;
+  bottom: 50%;
+  margin-bottom: -2px;
+  height: 2px;
+  left: 0;
+  right: 0;
+  background: #373d47;
+}
+
+.quicklinks {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.quicklink {
+  margin: 10px;
+}
+
+/* link no underline */
+a {
+  text-decoration: none;
+}
+
+/* unvisited link */
+a:link {
+  color: #CCC;
+}
+/* visited link */
+a:visited {
+  color: #CCC;
+}
+/* mouse over link */
+a:hover {
+  color: #EEE;
+}
+/* selected link */
+a:active {
+  color: #CCC;
+}
+
+.Menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.MenuButton {
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #555;/* Set a background color */
+  color: #ccc; /* Text color */
+  padding: 5px; /* Some padding */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 20px;/* Increase font size */
+  margin-top: 10px;
+  margin-left: 15px;
+  cursor:pointer;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #666; /* Add a dark-grey background on hover */
+  color: #eee; /* Text color */
+}
+	                                                   /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+#gamestable {
+  width: 100%;
+}
+
+.filter-controls {
+	margin-bottom: 7px;
+}
+  </style>
+  </head>
+  <body>
+    <div class="wrapper" id="wrapper">
+      <h2><strong>MAIN MENU - List<span>(Name ascending / Name ascending)</span></strong></h2>
+	  <div class="Menu"><a Class="MenuButton" href="index.html">Name ▲</A><a Class="MenuButton" href="default%20table_name_ascending_name_ascending.html">List ▲</A></div>
+	  <h2></h2>
+	  <div class="filter-controls">
+		<span>
+			<B>Name starts with:</B>
+		    <select id="filter-quickfield" onchange="applyQuickField();"><option></option><option value="#"># (2)</option><option value="A">A (15)</option><option value="B">B (14)</option><option value="C">C (13)</option><option value="D">D (14)</option><option value="E">E (3)</option><option value="F">F (9)</option><option value="G">G (17)</option><option value="H">H (8)</option><option value="I">I (3)</option><option value="J">J (1)</option><option value="K">K (5)</option><option value="L">L (6)</option><option value="M">M (13)</option><option value="N">N (11)</option><option value="O">O (6)</option><option value="P">P (8)</option><option value="Q">Q (5)</option><option value="R">R (19)</option><option value="S">S (40)</option><option value="T">T (17)</option><option value="W">W (11)</option><option value="X">X (5)</option><option value="Y">Y (3)</option><option value="Z">Z (2)</option></select>
+		</span>
+	  </div>
+	  <div class="filter-controls">
+		<span>
+		  <B>Field </B>
+		  <select id="filter-field">
+			<option></option>
+			<option value="name">Name</option>
+			<option value="data">Name</option>
+			<option value="lastactivity">Last Activity</option>
+			<option value="addeddate">Added</option>
+			<option value="playtime">Playtime</option>
+			<option value="source">Source</option>
+			<option value="platform">Platform</option>
+		  </select>
+		</span>
+
+		<span><B>contains </B><input id="filter-value" type="text" placeholder="value to filter"></span>
+
+		<button id="filter-clear">Clear filter</button>
+	  </div>
+	  <div id="gamestable"></div>
+    </div>
+	
+	<script>
+
+	var tabledata = [		
+ 	{coverimage:"01ca4f15-c958-40cf-9a4d-518e2a857d6e/af7415ac-8a28-4df4-90b3-16903c5917da.jpg", icon:"01ca4f15-c958-40cf-9a4d-518e2a857d6e/b4e4ecd3-da87-4a59-9315-ada0c030d262.ico", id:1, name:"10 Second Ninja", data:"10 Second Ninja", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"01ca4f15-c958-40cf-9a4d-518e2a857d6e.html"},
+{coverimage:"746c6f7a-d3ae-4f52-a75a-7f055c3c41c8/6072d934-75e9-4c5c-ac98-f66f727c0456.jpg", icon:"746c6f7a-d3ae-4f52-a75a-7f055c3c41c8/c8876ea9-d290-4947-bfb8-9a108b429bf0.ico", id:2, name:"911 Operator", data:"911 Operator", lastactivity:"Today", addeddate:"9/2/2024", playtime:"40m 0s", source:"Steam", platform:"PC (Windows)", gamefile:"746c6f7a-d3ae-4f52-a75a-7f055c3c41c8.html"},
+{coverimage:"4df61947-389b-4652-a354-b09e0ec8a5b1/a4493271-8068-4b0e-b441-92c3953b43e9.jpg", icon:"4df61947-389b-4652-a354-b09e0ec8a5b1/26389ae6-6598-4ee8-a46c-8a52c1a29b9f.ico", id:3, name:"A Story About My Uncle", data:"A Story About My Uncle", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"4df61947-389b-4652-a354-b09e0ec8a5b1.html"},
+{coverimage:"42bea0c1-6d2d-4bfb-8ed0-09668d5bff24/004b8ba9-3ef2-43cd-a4f6-4a3f364bea5a.jpg", icon:"42bea0c1-6d2d-4bfb-8ed0-09668d5bff24/9216e008-f967-4305-bba7-437658da952d.ico", id:4, name:"A Virus Named TOM", data:"A Virus Named TOM", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"42bea0c1-6d2d-4bfb-8ed0-09668d5bff24.html"},
+{coverimage:"cedb060c-674f-4397-bcc3-694d4b1e1bb9/d3baa4e9-6953-4289-bfa9-32e0816fd883.jpg", icon:"cedb060c-674f-4397-bcc3-694d4b1e1bb9/ab050cce-bf7c-4295-9398-bb02a5fc0ed3.ico", id:5, name:"Aaero", data:"Aaero", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"cedb060c-674f-4397-bcc3-694d4b1e1bb9.html"},
+{coverimage:"55689045-7e3e-4d57-8c39-f02cac1884da/21dcbed3-653a-41f2-a6ac-eab2b96e3db4.jpg", icon:"55689045-7e3e-4d57-8c39-f02cac1884da/43d45f59-e874-4fe1-8c18-1ccd84fd7b47.ico", id:6, name:"Abyss Odyssey", data:"Abyss Odyssey", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"55689045-7e3e-4d57-8c39-f02cac1884da.html"},
+{coverimage:"b4075465-00dc-45b8-a641-d5f63f208e32/8845cc7e-6e31-4914-ad5a-28e26795029d.jpg", icon:"b4075465-00dc-45b8-a641-d5f63f208e32/760d9ef4-80fd-4e57-b021-6a802a75af86.ico", id:7, name:"Acceleration of SUGURI 2", data:"Acceleration of SUGURI 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"b4075465-00dc-45b8-a641-d5f63f208e32.html"},
+{coverimage:"567cad97-6901-47ac-ac7c-14f82f660478/7578e135-753b-4dc7-8227-f467a1e042c2.jpg", icon:"567cad97-6901-47ac-ac7c-14f82f660478/aef4ddd9-3201-4242-8d63-6686251d77df.ico", id:8, name:"AI War: Fleet Command", data:"AI War: Fleet Command", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"567cad97-6901-47ac-ac7c-14f82f660478.html"},
+{coverimage:"8a518fbe-9e1c-4a46-b761-0237526cf103/92204081-99e9-40a9-92f1-cfe02ac688c7.jpg", icon:"8a518fbe-9e1c-4a46-b761-0237526cf103/f5b7c504-916c-45a5-94f3-f1c213e7a442.ico", id:9, name:"American Truck Simulator", data:"American Truck Simulator", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8a518fbe-9e1c-4a46-b761-0237526cf103.html"},
+{coverimage:"1eabd47c-243c-4f13-b55d-21b2e1fbc7a6/77e4a838-d9a7-4a31-91bc-68d8897dcf8c.jpg", icon:"1eabd47c-243c-4f13-b55d-21b2e1fbc7a6/e71bd6f1-6011-4f21-a7b2-90adee7572b6.ico", id:10, name:"Another Perspective", data:"Another Perspective", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"1eabd47c-243c-4f13-b55d-21b2e1fbc7a6.html"},
+{coverimage:"42cf0802-825f-40bd-a747-67ee762ab853/9c5b10f4-ca14-487a-a02a-24a0f3ec2631.jpg", icon:"42cf0802-825f-40bd-a747-67ee762ab853/0a095194-9ad8-4318-a71f-6afe16e93309.ico", id:11, name:"AquaNox", data:"AquaNox", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"42cf0802-825f-40bd-a747-67ee762ab853.html"},
+{coverimage:"574e0f60-c9a9-4c03-8cb7-f3d84def7c76/f0b199ed-102a-4867-aa9a-68fee7a92788.jpg", icon:"574e0f60-c9a9-4c03-8cb7-f3d84def7c76/317d1400-3535-4717-babc-d76015c86799.ico", id:12, name:"AquaNox 2: Revelation", data:"AquaNox 2: Revelation", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"574e0f60-c9a9-4c03-8cb7-f3d84def7c76.html"},
+{coverimage:"0749bc34-f801-4a29-b49a-eaa1ee37cbf1/eede05f9-01a1-46c2-b5b2-28a8be60c61b.jpg", icon:"0749bc34-f801-4a29-b49a-eaa1ee37cbf1/7c8b97a6-f560-463a-bd26-abfb5a48cf6b.ico", id:13, name:"Armello", data:"Armello", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"0749bc34-f801-4a29-b49a-eaa1ee37cbf1.html"},
+{coverimage:"7bbfa957-8411-43ff-830a-4ffbe526c7c6/7efeafc9-b8ef-4112-a9ff-e0eb6646f970.jpg", icon:"7bbfa957-8411-43ff-830a-4ffbe526c7c6/d53864b7-a8d3-4f2c-a44e-1b58acd4a067.ico", id:14, name:"Ashes of the Singularity: Escalation", data:"Ashes of the Singularity: Escalation", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"7bbfa957-8411-43ff-830a-4ffbe526c7c6.html"},
+{coverimage:"9c6c85c8-4b47-4c0d-a191-f24302679cf0/adc84596-3bef-4c63-be32-b7bf098f75c5.jpg", icon:"9c6c85c8-4b47-4c0d-a191-f24302679cf0/fa66640e-3b1f-46b5-87bd-c273b2085f68.ico", id:15, name:"Avernum 3: Ruined World", data:"Avernum 3: Ruined World", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"9c6c85c8-4b47-4c0d-a191-f24302679cf0.html"},
+{coverimage:"414cde55-3efe-485f-ba93-aa36764d3458/50f61804-c0a4-4e58-a01c-631f9c9bb930.jpg", icon:"414cde55-3efe-485f-ba93-aa36764d3458/7ead0f9d-2016-480a-8f44-8856425348e5.ico", id:16, name:"Aveyond 3-1: Lord of Twilight", data:"Aveyond 3-1: Lord of Twilight", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"414cde55-3efe-485f-ba93-aa36764d3458.html"},
+{coverimage:"2c6973fe-8bfd-438d-bcb4-788ce91fd1f8/d5118b33-f8d8-4c69-9ff9-680ec9cabb9a.jpg", icon:"2c6973fe-8bfd-438d-bcb4-788ce91fd1f8/f3bf7729-aade-4887-980f-725d46cdebcd.ico", id:17, name:"Aviary Attorney", data:"Aviary Attorney", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"2c6973fe-8bfd-438d-bcb4-788ce91fd1f8.html"},
+{coverimage:"20c470f7-cf8d-485d-ab79-3c4613fd10a4/970ce9e2-9dc2-49dd-b43a-731423a0635e.jpg", icon:"20c470f7-cf8d-485d-ab79-3c4613fd10a4/a59b2e61-109a-4dbd-8d54-6f2a1fc4d7bd.ico", id:18, name:"Ballistick", data:"Ballistick", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"20c470f7-cf8d-485d-ab79-3c4613fd10a4.html"},
+{coverimage:"8969e12f-b086-4574-98c8-9b01c5f90859/6a5c5347-9295-4a1b-ba8c-d3c2c1c5cb5b.jpg", icon:"8969e12f-b086-4574-98c8-9b01c5f90859/71fe678e-6efd-4b5e-b3a7-4f0b8ee1021d.ico", id:19, name:"Battle Chef Brigade", data:"Battle Chef Brigade", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8969e12f-b086-4574-98c8-9b01c5f90859.html"},
+{coverimage:"cc1bde95-e997-4bc7-8f14-5980ac47a5f9/936c2cd9-a94f-45f4-b9d4-26e9505352d0.jpg", icon:"cc1bde95-e997-4bc7-8f14-5980ac47a5f9/d95e1f90-ef9f-4cb6-a4fe-fcf60e8d5133.ico", id:20, name:"Bear With Me - Collector&#39;s Edition", data:"Bear With Me - Collector&#39;s Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"cc1bde95-e997-4bc7-8f14-5980ac47a5f9.html"},
+{coverimage:"773cd1d3-460a-423a-bb93-34718682c3b0/42795313-bc2c-4245-ad39-31bdf1fc4c24.jpg", icon:"773cd1d3-460a-423a-bb93-34718682c3b0/0be0bfb1-0c0e-4733-9691-26fe76c88351.ico", id:21, name:"Beat Hazard", data:"Beat Hazard", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"773cd1d3-460a-423a-bb93-34718682c3b0.html"},
+{coverimage:"899b96dd-9d7a-405a-9363-246964d87419/c01a14df-eb95-48f0-9624-cec9a614ff25.jpg", icon:"899b96dd-9d7a-405a-9363-246964d87419/8f9cb695-66be-496d-b8e8-2b8a71857e57.ico", id:22, name:"Beatbuddy: Tale of the Guardians", data:"Beatbuddy: Tale of the Guardians", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"899b96dd-9d7a-405a-9363-246964d87419.html"},
+{coverimage:"cdb58013-e940-4285-87bc-e506cde1068b/e122b181-caff-4b08-b88f-d47a3618b160.jpg", icon:"cdb58013-e940-4285-87bc-e506cde1068b/740132ce-1489-4916-a4a0-de4bfd79c934.ico", id:23, name:"Beholder", data:"Beholder", lastactivity:"Yesterday", addeddate:"9/2/2024", playtime:"1h 0m 0s", source:"Steam", platform:"PC (Windows)", gamefile:"cdb58013-e940-4285-87bc-e506cde1068b.html"},
+{coverimage:"958fae71-4f19-484f-8483-2fb7b04da081/984634b7-ab4f-4ffb-a5ca-d5f5e66a32fd.jpg", icon:"958fae71-4f19-484f-8483-2fb7b04da081/26a038a5-f098-4c4a-a5a4-5775d057521e.ico", id:24, name:"Black Mirror I", data:"Black Mirror I", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"958fae71-4f19-484f-8483-2fb7b04da081.html"},
+{coverimage:"d42360a9-aba5-4080-9aeb-b7b42e69e821/98ea7c97-d3ca-43a8-b1c7-a05160180eda.jpg", icon:"d42360a9-aba5-4080-9aeb-b7b42e69e821/0a897c91-2c10-49db-b5ac-abdbe4d24f35.ico", id:25, name:"Black The Fall", data:"Black The Fall", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d42360a9-aba5-4080-9aeb-b7b42e69e821.html"},
+{coverimage:"9497be67-d98d-443f-9eba-12808d64e009/3cf75520-006b-483e-91cd-ed1f690d84a7.jpg", icon:"9497be67-d98d-443f-9eba-12808d64e009/47bf60e5-1e53-44b9-bc42-5e10799fdaf7.ico", id:26, name:"Blackguards", data:"Blackguards", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"9497be67-d98d-443f-9eba-12808d64e009.html"},
+{coverimage:"bd1673f2-6dd5-4683-be4d-64c3e1c47130/596fab58-ae21-4382-bea4-2b6e009943ff.jpg", icon:"bd1673f2-6dd5-4683-be4d-64c3e1c47130/d7200d52-bc2d-4653-ae64-939a3317ae53.ico", id:27, name:"Blackguards 2", data:"Blackguards 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"bd1673f2-6dd5-4683-be4d-64c3e1c47130.html"},
+{coverimage:"b54fc933-075a-4800-8cc4-6eea14e56907/92cf1d08-cc30-4a0b-bacf-e7ccbe053eff.jpg", icon:"b54fc933-075a-4800-8cc4-6eea14e56907/a8731a0c-cfe9-44cf-bc91-6f24643681ee.ico", id:28, name:"BlazBlue: Chronophantasma Extend", data:"BlazBlue: Chronophantasma Extend", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"b54fc933-075a-4800-8cc4-6eea14e56907.html"},
+{coverimage:"a0f22280-3550-4d2c-a999-4f417a645c52/ddc38af2-fa13-43d9-8d31-8a8d42c6582d.jpg", icon:"a0f22280-3550-4d2c-a999-4f417a645c52/822761f4-595b-42dd-8c21-8aa16f90bd07.ico", id:29, name:"Bleed 2", data:"Bleed 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a0f22280-3550-4d2c-a999-4f417a645c52.html"},
+{coverimage:"cda1aa2e-2ecb-40d7-87f4-49171201ffdf/c5e432f2-dc1f-420b-8af4-22f3dc7ea2e0.jpg", icon:"cda1aa2e-2ecb-40d7-87f4-49171201ffdf/ce1f29ee-a0d2-4c1f-b678-b2df2fd9a42b.ico", id:30, name:"Breach &amp; Clear", data:"Breach &amp; Clear", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"cda1aa2e-2ecb-40d7-87f4-49171201ffdf.html"},
+{coverimage:"cc5870d8-d7ba-444a-acfa-842eb9df2652/795eaf1f-b0ed-4ca8-9cc2-a9aaf848b339.jpg", icon:"cc5870d8-d7ba-444a-acfa-842eb9df2652/a4189185-3b6a-4b8f-8801-ac0708b5627c.ico", id:31, name:"Brigador: Up-Armored Edition", data:"Brigador: Up-Armored Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"cc5870d8-d7ba-444a-acfa-842eb9df2652.html"},
+{coverimage:"f56574ce-90be-4787-abdd-d8a5724e9e1e/aafbca9d-426b-4423-9476-5a848627884b.jpg", icon:"f56574ce-90be-4787-abdd-d8a5724e9e1e/23ef424e-dfab-4346-9dac-2c56f590c692.ico", id:32, name:"Call of Duty: WWII", data:"Call of Duty: WWII", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f56574ce-90be-4787-abdd-d8a5724e9e1e.html"},
+{coverimage:"f56574ce-90be-4787-abdd-d8a5724e9e1e/aafbca9d-426b-4423-9476-5a848627884b.jpg", icon:"367ab940-630b-4dbe-8b8f-b901ca9ffd27/25f4d8e7-9b63-48d0-a220-8358b4fd61d9.ico", id:33, name:"Call of Duty: WWII - Multiplayer", data:"Call of Duty: WWII - Multiplayer", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"367ab940-630b-4dbe-8b8f-b901ca9ffd27.html"},
+{coverimage:"1a40c322-c133-4736-bdd2-7c7b5530124f/11bb25e5-651c-4067-88db-97bb4e905159.jpg", icon:"1a40c322-c133-4736-bdd2-7c7b5530124f/42c58cf5-6779-419f-9f83-07750ce19de9.ico", id:34, name:"Chasm", data:"Chasm", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"1a40c322-c133-4736-bdd2-7c7b5530124f.html"},
+{coverimage:"7720355d-4dc9-4d99-948c-30ae4bd8edbe/820bc802-73a5-4c59-b9d2-80add68b8623.jpg", icon:"7720355d-4dc9-4d99-948c-30ae4bd8edbe/307a6ec1-7203-407d-b673-40d445c469a4.ico", id:35, name:"Chroma Squad", data:"Chroma Squad", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"7720355d-4dc9-4d99-948c-30ae4bd8edbe.html"},
+{coverimage:"89e8e1fc-1d21-47b2-86cc-0bcacdeeb2c6/37b36d3e-2e51-4492-b850-e10bad60f3b4.jpg", icon:"89e8e1fc-1d21-47b2-86cc-0bcacdeeb2c6/16c65952-e73e-4497-8c82-aa05190d2d5a.ico", id:36, name:"Citizens of Earth", data:"Citizens of Earth", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"89e8e1fc-1d21-47b2-86cc-0bcacdeeb2c6.html"},
+{coverimage:"84661182-6486-4782-afe6-7343735b0ee2/bba6d700-f41a-49a0-9103-dc9cc19d6b88.jpg", icon:"84661182-6486-4782-afe6-7343735b0ee2/c76486b9-8899-4dde-a4db-ad23e903e049.ico", id:37, name:"Contagion", data:"Contagion", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"84661182-6486-4782-afe6-7343735b0ee2.html"},
+{coverimage:"6b07a8e3-6406-4e3c-a7e0-75557af3405e/d8b9646b-b4e4-4dd9-a3c2-329ca67c1e50.jpg", icon:"6b07a8e3-6406-4e3c-a7e0-75557af3405e/6a4a829f-5133-4a07-9b5b-d696b480a5ce.ico", id:38, name:"Cook, Serve, Delicious! 2!!", data:"Cook, Serve, Delicious! 2!!", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"6b07a8e3-6406-4e3c-a7e0-75557af3405e.html"},
+{coverimage:"6ccd7c13-e8c8-42f1-ab3a-2ad4a1526c7e/6650248d-f2ef-4390-bc88-c6fd876502ce.jpg", icon:"6ccd7c13-e8c8-42f1-ab3a-2ad4a1526c7e/5dbb9304-1d93-44ad-af6b-f7de176d4697.ico", id:39, name:"Crash Bandicoot N. Sane Trilogy", data:"Crash Bandicoot N. Sane Trilogy", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"6ccd7c13-e8c8-42f1-ab3a-2ad4a1526c7e.html"},
+{coverimage:"89b6774b-c329-41cc-80b6-152b66a85160/fa79692c-8ea2-4860-919a-ea47ed69797e.jpg", icon:"89b6774b-c329-41cc-80b6-152b66a85160/9e0e6127-2006-4182-a66d-3fcec49e7923.ico", id:40, name:"Crazy Machines 3", data:"Crazy Machines 3", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"89b6774b-c329-41cc-80b6-152b66a85160.html"},
+{coverimage:"c07c6f63-02d7-4c77-9aea-e01e9c740dca/6b897a23-26a9-4a19-b8a5-e19fd2558832.jpg", icon:"c07c6f63-02d7-4c77-9aea-e01e9c740dca/165f73d7-512d-4a43-90ae-d59b85e68bf2.ico", id:41, name:"Crimsonland", data:"Crimsonland", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"c07c6f63-02d7-4c77-9aea-e01e9c740dca.html"},
+{coverimage:"d901df5f-fe75-4e2b-a226-b3d9410c47af/5821a23d-caa0-4907-9aec-bc0eafa6c321.jpg", icon:"d901df5f-fe75-4e2b-a226-b3d9410c47af/efad8c94-75cd-4105-8720-86734443a0ef.ico", id:42, name:"Crimzon Clover  WORLD IGNITION", data:"Crimzon Clover  WORLD IGNITION", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d901df5f-fe75-4e2b-a226-b3d9410c47af.html"},
+{coverimage:"886560e9-9d07-44bd-9ba9-fde51eeaf7e3/b18e6a62-01d6-43fd-804d-545b624c00d1.jpg", icon:"886560e9-9d07-44bd-9ba9-fde51eeaf7e3/60eba276-4900-428a-a3e0-c20fa1b0cfe9.ico", id:43, name:"Crowntakers", data:"Crowntakers", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"886560e9-9d07-44bd-9ba9-fde51eeaf7e3.html"},
+{coverimage:"fd8016a8-e29c-4d8f-92e8-e0320b2c640e/a780baad-e3a5-47c6-b7fc-34462409909e.jpg", icon:"fd8016a8-e29c-4d8f-92e8-e0320b2c640e/eae733fd-d0d2-4ced-8d0c-662fbfaee606.ico", id:44, name:"Cursed Castilla (Maldita Castilla EX)", data:"Cursed Castilla (Maldita Castilla EX)", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"fd8016a8-e29c-4d8f-92e8-e0320b2c640e.html"},
+{coverimage:"224202df-28c4-48a4-883d-4b4d5f39e7c0/bd9fd7f3-3866-4b43-96df-5c41afe12700.jpg", icon:"224202df-28c4-48a4-883d-4b4d5f39e7c0/8bc8f42b-0883-4fdf-ac7a-69cbe8c0abbb.ico", id:45, name:"Dangerous High School Girls in Trouble!", data:"Dangerous High School Girls in Trouble!", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"224202df-28c4-48a4-883d-4b4d5f39e7c0.html"},
+{coverimage:"32579336-dc76-4111-a83a-24353289ac70/a2b16e3a-8ec5-48f7-b435-f251cf7c4d91.jpg", icon:"32579336-dc76-4111-a83a-24353289ac70/06cb1511-4553-4a12-8b2e-7f9edf189f0d.ico", id:46, name:"Darksiders II Deathinitive Edition", data:"Darksiders II Deathinitive Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"32579336-dc76-4111-a83a-24353289ac70.html"},
+{coverimage:"9b3cf007-6c11-4803-a210-09635512d421/da6c610e-e130-4f17-8f13-4224b0ff6014.jpg", icon:"9b3cf007-6c11-4803-a210-09635512d421/f4569bc2-7bf5-43d9-8dba-6af27b13545f.ico", id:47, name:"Dead Rising 2", data:"Dead Rising 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"9b3cf007-6c11-4803-a210-09635512d421.html"},
+{coverimage:"a3fadfa8-2396-4291-abef-f4167a341cb0/8b6e389c-1ccc-40f8-98f2-9abe7d025cf7.jpg", icon:"a3fadfa8-2396-4291-abef-f4167a341cb0/45383f62-b3ac-44cf-bf61-99d276ac9496.ico", id:48, name:"Dead Rising 4", data:"Dead Rising 4", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a3fadfa8-2396-4291-abef-f4167a341cb0.html"},
+{coverimage:"a3db304b-ce8d-48fe-b9b0-ae194454113b/fa9a99a6-651f-4cd1-a80c-056c173eec3f.jpg", icon:"a3db304b-ce8d-48fe-b9b0-ae194454113b/5a7617c2-59de-425b-bff0-420e8a9fdcf1.ico", id:49, name:"Death Ray Manta", data:"Death Ray Manta", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a3db304b-ce8d-48fe-b9b0-ae194454113b.html"},
+{coverimage:"75da58d6-f1cd-49e0-9264-2bf6b9a5fa92/053b2212-6bb5-4121-b5be-82cbaaf94c12.jpg", icon:"75da58d6-f1cd-49e0-9264-2bf6b9a5fa92/0c0d4ed7-1a99-42a3-a354-7c43a66bba9d.ico", id:50, name:"Detective Case and Clown Bot in: Murder in the Hotel Lisbon", data:"Detective Case and Clown Bot in: Murder in the Hotel Lisbon", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"75da58d6-f1cd-49e0-9264-2bf6b9a5fa92.html"},
+{coverimage:"23ad22d7-e670-4119-bcac-8cceae2f1e42/fa3212ed-9c21-4f60-a22e-92c1a912bfab.jpg", icon:"23ad22d7-e670-4119-bcac-8cceae2f1e42/13fe22a0-9a86-4974-9d2c-1c869587a989.ico", id:51, name:"Distance", data:"Distance", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"23ad22d7-e670-4119-bcac-8cceae2f1e42.html"},
+{coverimage:"e5e613c3-6bfe-4750-8607-68f8ffb9ef44/08d298fe-f212-469b-914a-a3544f77216e.jpg", icon:"e5e613c3-6bfe-4750-8607-68f8ffb9ef44/f207f9de-1afb-4cfd-9f77-727322fc558d.ico", id:52, name:"Divinity: Dragon Commander", data:"Divinity: Dragon Commander", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e5e613c3-6bfe-4750-8607-68f8ffb9ef44.html"},
+{coverimage:"5289d848-403d-4203-b86c-2e74ebbdf601/446ef60d-64c0-48a8-aab9-f28199b0a23d.jpg", icon:"5289d848-403d-4203-b86c-2e74ebbdf601/ebe9ae32-2dd6-419a-ad1e-a5ab02222020.ico", id:53, name:"Do Not Feed the Monkeys", data:"Do Not Feed the Monkeys", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"5289d848-403d-4203-b86c-2e74ebbdf601.html"},
+{coverimage:"fbab4406-5eb9-4a68-98af-15b3a21baa5d/1619aa69-2c5d-48cc-b188-23edb2202e96.jpg", icon:"fbab4406-5eb9-4a68-98af-15b3a21baa5d/9c5b3c01-9c1b-4060-94e7-7c57d839bffd.ico", id:54, name:"Doodle God", data:"Doodle God", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"fbab4406-5eb9-4a68-98af-15b3a21baa5d.html"},
+{coverimage:"7838b7d8-6f4f-4449-b3fd-cfc56e0fb149/5dc062d1-5f14-478b-9cb5-0849a7dfdd11.jpg", icon:"7838b7d8-6f4f-4449-b3fd-cfc56e0fb149/ab804e31-01a0-4a3c-86d8-8bb53ca0ae73.ico", id:55, name:"Draw a Stickman: EPIC", data:"Draw a Stickman: EPIC", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"7838b7d8-6f4f-4449-b3fd-cfc56e0fb149.html"},
+{coverimage:"4a99c00f-8552-4943-b655-57d9923f0723/f2df439e-5008-45de-96f6-79a71ca9b5f1.jpg", icon:"4a99c00f-8552-4943-b655-57d9923f0723/9e45f4fe-a6f1-4304-bb64-8dc770c11d44.ico", id:56, name:"Dungeons 3", data:"Dungeons 3", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"4a99c00f-8552-4943-b655-57d9923f0723.html"},
+{coverimage:"60583818-371f-4055-bed1-27eafb11952b/4725d672-de10-41c1-a785-05e8f542aa5a.jpg", icon:"60583818-371f-4055-bed1-27eafb11952b/ca8d158f-b8db-4dc4-984f-38958a91de0a.ico", id:57, name:"Duskers", data:"Duskers", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"60583818-371f-4055-bed1-27eafb11952b.html"},
+{coverimage:"5d70933f-70cd-4c21-a264-a10b3507234d/39ffa6a4-8154-4fcb-af08-91d3cc6dd773.jpg", icon:"5d70933f-70cd-4c21-a264-a10b3507234d/9a657b58-7a67-4dd5-9f61-6d5a338e52de.ico", id:58, name:"Dusty Revenge", data:"Dusty Revenge", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"5d70933f-70cd-4c21-a264-a10b3507234d.html"},
+{coverimage:"b8d461f0-ac0a-4e0c-99df-5854bee1d482/a793bc7c-c9aa-462d-b37e-29882a026306.jpg", icon:"b8d461f0-ac0a-4e0c-99df-5854bee1d482/176e9634-d943-4f7a-b375-062a6d64c36d.ico", id:59, name:"Ellipsis", data:"Ellipsis", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"b8d461f0-ac0a-4e0c-99df-5854bee1d482.html"},
+{coverimage:"55c182b8-d63d-43d4-899b-81540df20152/6dbef5b0-1fbf-4c18-8833-f4ec552ece90.jpg", icon:"55c182b8-d63d-43d4-899b-81540df20152/e0a3742b-3761-4d19-a7ca-bea1ae986138.ico", id:60, name:"Emily is Away Too", data:"Emily is Away Too", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"55c182b8-d63d-43d4-899b-81540df20152.html"},
+{coverimage:"83ba1347-292c-4499-bd86-92bea6a8326d/ddb3cba3-e7d9-4874-afba-fea005e179d6.jpg", icon:"83ba1347-292c-4499-bd86-92bea6a8326d/6a2a0643-9652-46b3-9ead-c23a82670915.ico", id:61, name:"Environmental Station Alpha", data:"Environmental Station Alpha", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"83ba1347-292c-4499-bd86-92bea6a8326d.html"},
+{coverimage:"284f3007-9ffb-4f6f-b7f0-ac82285f5556/a8d32f03-ab64-4e13-a9ea-741b88107c30.jpg", icon:"284f3007-9ffb-4f6f-b7f0-ac82285f5556/7d6085ce-8a40-47a5-9bce-566b2bbe8fd1.ico", id:62, name:"Fieldrunners", data:"Fieldrunners", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"284f3007-9ffb-4f6f-b7f0-ac82285f5556.html"},
+{coverimage:"3285c147-96f4-4d4e-9493-5d83aed3caae/7c565d94-a8bb-4e9a-b7c2-84c3e877af07.jpg", icon:"3285c147-96f4-4d4e-9493-5d83aed3caae/f60cd88f-4b0a-4103-95b4-586238fcbcf6.ico", id:63, name:"Fieldrunners 2", data:"Fieldrunners 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"3285c147-96f4-4d4e-9493-5d83aed3caae.html"},
+{coverimage:"0f65bd43-7b7a-4528-9cb5-ce34f465fc5c/671d0488-d28e-4a25-ad5b-69acc9024e1d.jpg", icon:"0f65bd43-7b7a-4528-9cb5-ce34f465fc5c/de2da919-0336-4c97-a670-db6648f6461b.ico", id:64, name:"Finding Paradise", data:"Finding Paradise", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"0f65bd43-7b7a-4528-9cb5-ce34f465fc5c.html"},
+{coverimage:"0cd3d524-1a1c-49d5-94ee-9361ec8a6bc1/0d03ae04-be61-43f4-a61f-6ab1ca403b03.jpg", icon:"0cd3d524-1a1c-49d5-94ee-9361ec8a6bc1/1e300d9a-b8da-412b-9d7e-12ed1b3f260f.ico", id:65, name:"Fluffy Horde", data:"Fluffy Horde", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"0cd3d524-1a1c-49d5-94ee-9361ec8a6bc1.html"},
+{coverimage:"592d79a0-e7be-4ae6-aa1c-a400451952f9/0a0701a4-0691-42e9-8c10-79403661806e.jpg", icon:"592d79a0-e7be-4ae6-aa1c-a400451952f9/aa87cb19-7d83-4b73-98c2-09714f9393fb.ico", id:66, name:"FOTONICA", data:"FOTONICA", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"592d79a0-e7be-4ae6-aa1c-a400451952f9.html"},
+{coverimage:"8432f2e9-fca4-4b1d-9e9b-7ebe3ab9fc53/d28892f7-e6c7-4677-bbf2-f39e4b807b21.jpg", icon:"8432f2e9-fca4-4b1d-9e9b-7ebe3ab9fc53/4fd2dba0-0fa9-4acf-b3b7-f1a3b83291a3.ico", id:67, name:"Front Mission Evolved", data:"Front Mission Evolved", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8432f2e9-fca4-4b1d-9e9b-7ebe3ab9fc53.html"},
+{coverimage:"c50a1d95-c9df-425a-9df6-f0063df88254/a968a1f4-d976-4171-97d9-9a0b39fc2a5a.jpg", icon:"c50a1d95-c9df-425a-9df6-f0063df88254/29962b26-c138-4dbb-ab1d-8e636872cb63.ico", id:68, name:"Frostpunk", data:"Frostpunk", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"c50a1d95-c9df-425a-9df6-f0063df88254.html"},
+{coverimage:"ace72b0a-282d-40da-b6dc-fd6e65801990/df0a4b24-9298-42fb-bc6c-b479cd05335f.jpg", icon:"ace72b0a-282d-40da-b6dc-fd6e65801990/40060814-3287-4c1a-9f42-7ddbe0097094.ico", id:69, name:"Full Metal Furies", data:"Full Metal Furies", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"ace72b0a-282d-40da-b6dc-fd6e65801990.html"},
+{coverimage:"a84e7601-8522-4de0-940b-411ba3c45da4/21226f44-c4a4-45c5-987b-9ddbc71af57a.jpg", icon:"a84e7601-8522-4de0-940b-411ba3c45da4/12aa3df8-18fa-4aed-be33-89a83c984a40.ico", id:70, name:"Furi", data:"Furi", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a84e7601-8522-4de0-940b-411ba3c45da4.html"},
+{coverimage:"539064d3-04f8-4d07-bef2-d84e44399fff/6260b813-5d7b-44d6-bcf9-01895c01efd7.jpg", icon:"539064d3-04f8-4d07-bef2-d84e44399fff/3ebd1bab-0f55-4955-9bac-7f2604c66346.ico", id:71, name:"Galactic Civilizations I: Ultimate Edition", data:"Galactic Civilizations I: Ultimate Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"539064d3-04f8-4d07-bef2-d84e44399fff.html"},
+{coverimage:"336b7ff6-5a75-439a-aee7-45c9e3accc5f/7cdcf5d4-7cdb-4ba6-83af-208eb603e2e6.jpg", icon:"336b7ff6-5a75-439a-aee7-45c9e3accc5f/04f4d5df-b4ed-4210-a50a-26be6cd5174c.ico", id:72, name:"Galactic Civilizations III", data:"Galactic Civilizations III", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"336b7ff6-5a75-439a-aee7-45c9e3accc5f.html"},
+{coverimage:"0294f275-e659-4355-8a77-09b619b1515d/e5f3c7b8-146c-42f7-be46-98ac88d56414.jpg", icon:"0294f275-e659-4355-8a77-09b619b1515d/202f9335-9b09-4daa-8afc-a0eb60e60894.ico", id:73, name:"GALAK-Z", data:"GALAK-Z", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"0294f275-e659-4355-8a77-09b619b1515d.html"},
+{coverimage:"34b214d3-2b58-42f2-86c4-58df0466e781/7046f1b6-6d19-4f98-b374-23ba51de983a.jpg", icon:"34b214d3-2b58-42f2-86c4-58df0466e781/061ef259-f78a-4fbe-a318-c9452a034365.ico", id:74, name:"Galcon Fusion", data:"Galcon Fusion", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"34b214d3-2b58-42f2-86c4-58df0466e781.html"},
+{coverimage:"366ac008-66b3-40db-8caa-b02503a08ef6/c16f436f-54d0-4738-ae2d-1a05da4650db.jpg", icon:"366ac008-66b3-40db-8caa-b02503a08ef6/71ba9d27-eeee-4dc4-ac47-cafbd3b31a00.ico", id:75, name:"Galcon Legends", data:"Galcon Legends", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"366ac008-66b3-40db-8caa-b02503a08ef6.html"},
+{coverimage:"876c4012-2089-4346-9052-0b42450a2b6a/a7ce4f49-3df8-42c5-8bbe-abe5993694de.jpg", icon:"876c4012-2089-4346-9052-0b42450a2b6a/14bfa133-e4f7-4e39-b1b4-375dfccdfbc6.ico", id:76, name:"Getting Over It with Bennett Foddy", data:"Getting Over It with Bennett Foddy", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"876c4012-2089-4346-9052-0b42450a2b6a.html"},
+{coverimage:"17eb6d37-581c-40b3-abb8-ea9bedfd34b3/09ec378e-bd41-4a05-a713-29483e5e332f.jpg", icon:"17eb6d37-581c-40b3-abb8-ea9bedfd34b3/ac721b9f-fda0-46a7-a7b4-0137cf66e732.ico", id:77, name:"Girls Like Robots", data:"Girls Like Robots", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"17eb6d37-581c-40b3-abb8-ea9bedfd34b3.html"},
+{coverimage:"aa15fa35-bca9-48c4-a935-9bb1c05d562f/4a548df2-b367-4ee5-acc5-b9b853f82d82.jpg", icon:"aa15fa35-bca9-48c4-a935-9bb1c05d562f/c2874c65-d433-4476-883a-d5d7c9fc3f7d.ico", id:78, name:"Goat Simulator", data:"Goat Simulator", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"aa15fa35-bca9-48c4-a935-9bb1c05d562f.html"},
+{coverimage:"a580f999-24d9-43cc-8f94-df32dcfc8a69/d9e33f17-239a-4964-b45e-74a0b1070de3.jpg", icon:"a580f999-24d9-43cc-8f94-df32dcfc8a69/bc6a07f4-f490-4c3d-a29d-9e89efe44226.ico", id:79, name:"Goats on a Bridge", data:"Goats on a Bridge", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a580f999-24d9-43cc-8f94-df32dcfc8a69.html"},
+{coverimage:"e16f835e-04fb-4e80-800b-765d265bdf11/e9f1f4ef-614d-41ca-97fe-e603d022a242.jpg", icon:"e16f835e-04fb-4e80-800b-765d265bdf11/e523b6ba-5440-41dc-9bf3-f16cce107827.ico", id:80, name:"GOD EATER 2 Rage Burst", data:"GOD EATER 2 Rage Burst", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e16f835e-04fb-4e80-800b-765d265bdf11.html"},
+{coverimage:"57b472f4-84f6-4762-9700-08ebb42d4be6/aba7c615-1fcf-4496-9f79-7764fd240c94.jpg", icon:"57b472f4-84f6-4762-9700-08ebb42d4be6/173f9e22-583f-4ac8-9d04-28cace868498.ico", id:81, name:"GOD EATER RESURRECTION", data:"GOD EATER RESURRECTION", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"57b472f4-84f6-4762-9700-08ebb42d4be6.html"},
+{coverimage:"a43c0ff6-704f-4512-89c0-88f4924634b3/33011d32-ea19-4f9b-9978-c5f1b2cf7530.jpg", icon:"a43c0ff6-704f-4512-89c0-88f4924634b3/4c2b9051-6ed4-4269-b38b-755cecb71ed8.ico", id:82, name:"God&#39;s Trigger", data:"God&#39;s Trigger", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a43c0ff6-704f-4512-89c0-88f4924634b3.html"},
+{coverimage:"90dd7129-5ae1-4c10-9044-074d6de88535/c0b26dd5-68f4-4923-8803-c7fc1dc5401f.jpg", icon:"90dd7129-5ae1-4c10-9044-074d6de88535/97868c94-4ba8-4423-b068-a88911199b76.ico", id:83, name:"GRAV", data:"GRAV", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"90dd7129-5ae1-4c10-9044-074d6de88535.html"},
+{coverimage:"b7835c18-4f18-41d7-b58e-881499df02c3/3d75195d-2263-4666-ae06-ad376762c38f.jpg", icon:"b7835c18-4f18-41d7-b58e-881499df02c3/920a3d92-a0b4-4015-af22-a5ab1756828f.ico", id:84, name:"Guacamelee! 2", data:"Guacamelee! 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"b7835c18-4f18-41d7-b58e-881499df02c3.html"},
+{coverimage:"d9c23690-87c8-4962-a60a-83279b4dd282/5e3a2e41-65cf-499c-a77a-6594bf7cecca.jpg", icon:"d9c23690-87c8-4962-a60a-83279b4dd282/6a3fa146-9b1a-4531-b443-42424854c869.ico", id:85, name:"Guacamelee! Gold Edition", data:"Guacamelee! Gold Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d9c23690-87c8-4962-a60a-83279b4dd282.html"},
+{coverimage:"54ad05ff-a87a-41ee-8203-0b67322a9ff2/70e914d2-3e16-4561-8d28-93adba53cd27.jpg", icon:"54ad05ff-a87a-41ee-8203-0b67322a9ff2/c5d01bc5-dd78-4b00-be17-a46f122a8735.ico", id:86, name:"Guacamelee! Super Turbo Championship Edition", data:"Guacamelee! Super Turbo Championship Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"54ad05ff-a87a-41ee-8203-0b67322a9ff2.html"},
+{coverimage:"e5d824db-7fd0-4106-a7fa-ce61fda48d3f/ea538d40-a433-446b-918b-15efca2181a9.jpg", icon:"e5d824db-7fd0-4106-a7fa-ce61fda48d3f/8b1175a3-8f2e-4d3d-921b-b5baf273285e.ico", id:87, name:"Gyromancer", data:"Gyromancer", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e5d824db-7fd0-4106-a7fa-ce61fda48d3f.html"},
+{coverimage:"cfdb2b19-7f86-48c2-ab08-077a6a2c816b/8d1b553b-371b-4b0a-b85a-2296c3b785c0.jpg", icon:"cfdb2b19-7f86-48c2-ab08-077a6a2c816b/51a9928b-951b-4797-9fac-636173a1b50a.ico", id:88, name:"HackyZack", data:"HackyZack", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"cfdb2b19-7f86-48c2-ab08-077a6a2c816b.html"},
+{coverimage:"0031419a-d866-453f-82f2-fa3c3d447736/2963746a-0049-4345-995b-86e8ccb3585b.jpg", icon:"0031419a-d866-453f-82f2-fa3c3d447736/2ef57e2c-256a-424b-ba7c-9f1b2dc34679.ico", id:89, name:"Hard Reset", data:"Hard Reset", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"0031419a-d866-453f-82f2-fa3c3d447736.html"},
+{coverimage:"97bae64b-bebb-4a1a-a78d-47536e1a7ea3/0267ce6e-0e62-40ff-a82e-12f41bf8c26a.jpg", icon:"97bae64b-bebb-4a1a-a78d-47536e1a7ea3/9f1fa770-b137-45a7-a284-cfd8fb423242.ico", id:90, name:"Hard Reset Redux", data:"Hard Reset Redux", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"97bae64b-bebb-4a1a-a78d-47536e1a7ea3.html"},
+{coverimage:"652910da-247a-4e0a-9a62-982073a97607/7d74da0f-e4de-4bb6-8597-f5a28ce20bfb.jpg", icon:"652910da-247a-4e0a-9a62-982073a97607/ad91de67-aed5-4d5d-b277-5b0070862f36.ico", id:91, name:"Hidden Folks", data:"Hidden Folks", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"652910da-247a-4e0a-9a62-982073a97607.html"},
+{coverimage:"f272bad5-7a05-4768-9c47-b2e6504a92a9/6626f470-3568-4d96-86a2-53e234ea7368.jpg", icon:"f272bad5-7a05-4768-9c47-b2e6504a92a9/babbe3a8-06f0-49af-bc89-75251d7b1330.ico", id:92, name:"HITMAN", data:"HITMAN", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f272bad5-7a05-4768-9c47-b2e6504a92a9.html"},
+{coverimage:"2bce2423-07a4-4271-b951-d1a93579d16e/d402349f-c48d-495c-9f3f-86dbcb4325d8.jpg", icon:"2bce2423-07a4-4271-b951-d1a93579d16e/4e4fdb2f-d777-4321-9db6-7f63ba1e04af.ico", id:93, name:"HIVESWAP: ACT 1", data:"HIVESWAP: ACT 1", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"2bce2423-07a4-4271-b951-d1a93579d16e.html"},
+{coverimage:"85dec578-586c-43d5-aaee-a0556f15eced/2af2c44a-8a17-4ead-a99b-a8adffdbaca0.jpg", icon:"85dec578-586c-43d5-aaee-a0556f15eced/04dacea2-8fe1-4338-b051-6e3135a52dbe.ico", id:94, name:"Hollow Knight", data:"Hollow Knight", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"85dec578-586c-43d5-aaee-a0556f15eced.html"},
+{coverimage:"45898c8c-5585-499f-b64a-92ea31814cc1/f863ce71-9a0f-454a-921c-8e4d35d489f6.jpg", icon:"45898c8c-5585-499f-b64a-92ea31814cc1/4e8b651d-1e27-4694-857a-04953ee26619.ico", id:95, name:"Holy Potatoes! We’re in Space?!", data:"Holy Potatoes! We’re in Space?!", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"45898c8c-5585-499f-b64a-92ea31814cc1.html"},
+{coverimage:"41716539-5f78-45ed-9e11-827b9f04a238/1ebe1f66-bb3b-44af-8788-b5b49f5561cb.jpg", icon:"41716539-5f78-45ed-9e11-827b9f04a238/f2cea3b6-946e-4c7e-a08f-bf1b69e8c850.ico", id:96, name:"Immortal Redneck", data:"Immortal Redneck", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"41716539-5f78-45ed-9e11-827b9f04a238.html"},
+{coverimage:"bb7092ff-1935-4e9d-8671-7f87a97bc92a/ca4a5e5f-9b6c-462d-b65e-787e107d5af1.jpg", icon:"bb7092ff-1935-4e9d-8671-7f87a97bc92a/12360ecf-b881-48d5-aa72-f5152a03061a.jpg", id:97, name:"Ittle Dew", data:"Ittle Dew", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"bb7092ff-1935-4e9d-8671-7f87a97bc92a.html"},
+{coverimage:"72d6c1b1-829d-48b0-b7e8-bbddf81fe6dd/5179ca36-27ff-4bc2-8d4b-ba414379fde5.jpg", icon:"72d6c1b1-829d-48b0-b7e8-bbddf81fe6dd/054e17f4-2708-4460-8c90-eae8c6bc609c.ico", id:98, name:"I’m not a Monster", data:"I’m not a Monster", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"72d6c1b1-829d-48b0-b7e8-bbddf81fe6dd.html"},
+{coverimage:"e5a245da-08b0-4486-b771-c13e995706d0/61989172-174c-4ba6-81a3-f5d1fcdb9bf8.jpg", icon:"e5a245da-08b0-4486-b771-c13e995706d0/0502bb6e-e801-455a-96c6-f935748d29e6.ico", id:99, name:"Jalopy", data:"Jalopy", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e5a245da-08b0-4486-b771-c13e995706d0.html"},
+{coverimage:"685bf266-ff73-406b-8c38-80220f361c4d/48273fbb-ec4c-47cc-a568-80d5029ce3f5.jpg", icon:"685bf266-ff73-406b-8c38-80220f361c4d/eb63394c-399e-4cf4-bd6f-d14836037ba3.ico", id:100, name:"Ken Follett&#39;s The Pillars of the Earth", data:"Ken Follett&#39;s The Pillars of the Earth", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"685bf266-ff73-406b-8c38-80220f361c4d.html"},
+{coverimage:"984a980e-4e29-466d-a10d-ed61bf42722d/11a65c1d-0134-4440-a73b-d3783c862a23.jpg", icon:"984a980e-4e29-466d-a10d-ed61bf42722d/ced73846-8017-47bc-9363-fab46ad7e3b3.ico", id:101, name:"Kentucky Route Zero", data:"Kentucky Route Zero", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"984a980e-4e29-466d-a10d-ed61bf42722d.html"},
+{coverimage:"dc58adb9-e0ce-47f8-99c7-d11d69f0ef73/3a0c6eed-c988-43d0-b1a6-a6478b00ef51.jpg", icon:"dc58adb9-e0ce-47f8-99c7-d11d69f0ef73/a3c6597a-5529-433e-8629-28c5f678acbc.ico", id:102, name:"Kero Blaster", data:"Kero Blaster", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"dc58adb9-e0ce-47f8-99c7-d11d69f0ef73.html"},
+{coverimage:"fdd8dbad-6bdc-4216-8cad-873ffc667009/c4f27fcd-b2ef-4309-b59e-2e10c24faa51.jpg", icon:"fdd8dbad-6bdc-4216-8cad-873ffc667009/15d24431-690e-46e3-8468-81c80f03b2a6.ico", id:103, name:"KHOLAT", data:"KHOLAT", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"fdd8dbad-6bdc-4216-8cad-873ffc667009.html"},
+{coverimage:"43e76ee1-85a9-4619-9459-94b6b589e609/c94aacdf-152c-4870-b034-d3c6f61aa5f4.jpg", icon:"43e76ee1-85a9-4619-9459-94b6b589e609/cba1aebc-8362-4b2e-ac8c-198c3f1a81a7.ico", id:104, name:"Krypta FM", data:"Krypta FM", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"43e76ee1-85a9-4619-9459-94b6b589e609.html"},
+{coverimage:"fcaef2e2-d274-41df-a877-0a7172207e56/96236237-a593-467c-98b8-774e4915f921.jpg", icon:"fcaef2e2-d274-41df-a877-0a7172207e56/96334fa6-3c56-45ce-8287-38a9a157f012.ico", id:105, name:"Labyrinthine Dreams", data:"Labyrinthine Dreams", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"fcaef2e2-d274-41df-a877-0a7172207e56.html"},
+{coverimage:"53c5a390-c666-4517-9c99-45402dd25467/6565cf0d-2dd5-4b56-b273-dbab5d5dc202.jpg", icon:"53c5a390-c666-4517-9c99-45402dd25467/fc2970c4-ce50-41b6-a5a7-5ecd2829e025.ico", id:106, name:"Laser League: World Arena", data:"Laser League: World Arena", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"53c5a390-c666-4517-9c99-45402dd25467.html"},
+{coverimage:"ef8b79c8-ab08-4f7d-9867-70230766f413/c1aac5aa-5f89-4efd-8cc2-000600a9613f.jpg", icon:"ef8b79c8-ab08-4f7d-9867-70230766f413/df018561-72e9-4a13-a195-4d8e3ded47f4.ico", id:107, name:"Last Word", data:"Last Word", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"ef8b79c8-ab08-4f7d-9867-70230766f413.html"},
+{coverimage:"f58c5765-e83b-45d8-a074-ac28cab81a96/42961a2e-70a7-4ace-bb42-da6139de2927.jpg", icon:"f58c5765-e83b-45d8-a074-ac28cab81a96/400b5f53-05b1-49cb-b97d-09ab607066f7.ico", id:108, name:"Lethal League", data:"Lethal League", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f58c5765-e83b-45d8-a074-ac28cab81a96.html"},
+{coverimage:"a78e788e-de1f-43f4-a3fc-7d8b185c81d9/4ec2e1f0-ba14-4a83-98fd-8622291f52c5.jpg", icon:"a78e788e-de1f-43f4-a3fc-7d8b185c81d9/9679d14c-c831-445c-bfe7-76282d0b8df2.ico", id:109, name:"Lost Castle", data:"Lost Castle", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a78e788e-de1f-43f4-a3fc-7d8b185c81d9.html"},
+{coverimage:"e76d9f45-981e-48e4-8810-d0c6c34b7753/8726faa5-ad34-414e-ac4b-6b73dc1b2cd8.jpg", icon:"e76d9f45-981e-48e4-8810-d0c6c34b7753/6a701632-97be-421c-832d-833fc2da758b.ico", id:110, name:"Love is Dead", data:"Love is Dead", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e76d9f45-981e-48e4-8810-d0c6c34b7753.html"},
+{coverimage:"88b40c0c-acf5-498b-95c7-992b7f0f25fb/f4246ed2-f8e9-4dab-80fc-c2394d73cd90.jpg", icon:"88b40c0c-acf5-498b-95c7-992b7f0f25fb/a1b664f8-6483-4589-8563-87df726bc9c7.ico", id:111, name:"Maize", data:"Maize", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"88b40c0c-acf5-498b-95c7-992b7f0f25fb.html"},
+{coverimage:"e124ac7d-2697-4069-bb7b-1f875c283e4d/eb43e3a9-1b7d-4e87-ad99-847b6a077a96.jpg", icon:"e124ac7d-2697-4069-bb7b-1f875c283e4d/544110d1-3ec0-4647-b682-bfc0bffdacba.ico", id:112, name:"Men of War: Assault Squad", data:"Men of War: Assault Squad", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e124ac7d-2697-4069-bb7b-1f875c283e4d.html"},
+{coverimage:"48593905-17cf-4d3e-9926-00891674b7cc/4ac3fdbb-28d4-4fef-868f-d28619bfe186.jpg", icon:"48593905-17cf-4d3e-9926-00891674b7cc/abc37514-f70f-4269-b5c2-87cf34cc80a4.ico", id:113, name:"METAL GEAR SOLID V: GROUND ZEROES", data:"METAL GEAR SOLID V: GROUND ZEROES", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"48593905-17cf-4d3e-9926-00891674b7cc.html"},
+{coverimage:"f37567dc-7afd-49c8-ac0c-0ad116d5c883/04c2cb66-ea71-4ca0-8401-539a82a58e46.jpg", icon:"f37567dc-7afd-49c8-ac0c-0ad116d5c883/94df35fe-75e0-4f49-a130-644667a104d2.ico", id:114, name:"Minit", data:"Minit", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f37567dc-7afd-49c8-ac0c-0ad116d5c883.html"},
+{coverimage:"dd70440a-3d2b-4985-bff1-583c1580a856/0c1c0287-79ba-4a14-b7f1-46fb37ac862e.jpg", icon:"dd70440a-3d2b-4985-bff1-583c1580a856/1c185086-3fe1-4b08-9ebe-4c1a7ad6c407.ico", id:115, name:"Momodora: Reverie Under the Moonlight", data:"Momodora: Reverie Under the Moonlight", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"dd70440a-3d2b-4985-bff1-583c1580a856.html"},
+{coverimage:"bc99f11b-b1d2-464d-ba16-1236798ed7db/f53f527e-21c2-4532-9dd0-afbead06b691.jpg", icon:"bc99f11b-b1d2-464d-ba16-1236798ed7db/fd227d5d-ca01-480d-860c-24d5dd5d49cd.ico", id:116, name:"Monster Loves You!", data:"Monster Loves You!", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"bc99f11b-b1d2-464d-ba16-1236798ed7db.html"},
+{coverimage:"e9fdbc91-f9aa-452d-9374-0e7387bf8b7a/a7b01101-fc35-42e3-8f9d-261e1aa0868e.jpg", icon:"e9fdbc91-f9aa-452d-9374-0e7387bf8b7a/3c714ed3-f5c7-4068-9e64-21f967f60ed2.ico", id:117, name:"Monster Prom", data:"Monster Prom", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e9fdbc91-f9aa-452d-9374-0e7387bf8b7a.html"},
+{coverimage:"0a8020b6-2046-465b-97fc-f5a695db8f3c/cb643644-d4cc-4777-a127-23dcf1aad7bb.jpg", icon:"0a8020b6-2046-465b-97fc-f5a695db8f3c/a8841d93-bb69-4205-b6fb-56773ee6ed15.ico", id:118, name:"Moon Hunters", data:"Moon Hunters", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"0a8020b6-2046-465b-97fc-f5a695db8f3c.html"},
+{coverimage:"d7f5c566-a8fb-46d3-92ca-3e2f8250674c/fd8a6cb4-20ce-4605-b90b-6b057f40ee80.jpg", icon:"d7f5c566-a8fb-46d3-92ca-3e2f8250674c/2c3a636a-0243-4331-84d8-e8d32b82d858.ico", id:119, name:"MOTHERGUNSHIP", data:"MOTHERGUNSHIP", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d7f5c566-a8fb-46d3-92ca-3e2f8250674c.html"},
+{coverimage:"be3a2316-0504-4973-bf20-3fc314de6c75/6b387ff9-27d9-4477-b840-9d5973ab3906.jpg", icon:"be3a2316-0504-4973-bf20-3fc314de6c75/80572894-745f-4cd3-887e-11ced04b5ea9.ico", id:120, name:"Mr Shifty", data:"Mr Shifty", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"be3a2316-0504-4973-bf20-3fc314de6c75.html"},
+{coverimage:"f411e816-4237-44a8-8286-39bda0695108/7cdf321f-42ec-4a32-a381-6a41394a4446.jpg", icon:"f411e816-4237-44a8-8286-39bda0695108/328076da-2e72-4c2b-b344-d21172125543.ico", id:121, name:"Mushroom 11", data:"Mushroom 11", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f411e816-4237-44a8-8286-39bda0695108.html"},
+{coverimage:"95fadcef-0aab-473d-9871-b155bc017656/adb5d22d-f88e-43d9-99bb-ede24ad523ba.jpg", icon:"95fadcef-0aab-473d-9871-b155bc017656/7d13d4c7-2d28-4036-ac0a-4a09b6952c78.ico", id:122, name:"Mutant Year Zero: Road to Eden", data:"Mutant Year Zero: Road to Eden", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"95fadcef-0aab-473d-9871-b155bc017656.html"},
+{coverimage:"5d8052a1-ca1e-4da2-9c86-e9a5a69be5e1/0b524e7a-76a5-4014-917a-db0cf90ca8e5.jpg", icon:"5d8052a1-ca1e-4da2-9c86-e9a5a69be5e1/7e2e15bf-bfeb-4845-bffd-8fa177fe81e9.ico", id:123, name:"MX vs. ATV Reflex", data:"MX vs. ATV Reflex", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"5d8052a1-ca1e-4da2-9c86-e9a5a69be5e1.html"},
+{coverimage:"937b8bd7-f1da-4845-8181-45107f799fcc/8e63ebd1-7758-4691-9e67-ef1c85d28b9c.jpg", icon:"937b8bd7-f1da-4845-8181-45107f799fcc/e5650d00-82ed-4f42-9bac-654bf7d342a1.ico", id:124, name:"NBA 2K17", data:"NBA 2K17", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"937b8bd7-f1da-4845-8181-45107f799fcc.html"},
+{coverimage:"46efde3f-1173-403c-a39d-bae36e3ab820/1308ce70-0626-4a07-9929-840685a37b64.jpg", icon:"46efde3f-1173-403c-a39d-bae36e3ab820/0995908d-dbd7-4154-a6b3-f11c41ed863a.ico", id:125, name:"NBA Playgrounds", data:"NBA Playgrounds", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"46efde3f-1173-403c-a39d-bae36e3ab820.html"},
+{coverimage:"76bd93a9-63aa-42fe-aea6-90de3c425a08/6742ea44-21b6-44fe-bc01-235ddd218425.jpg", icon:"76bd93a9-63aa-42fe-aea6-90de3c425a08/ce306dc2-5bb6-4ef2-a0d0-29d7ace13397.ico", id:126, name:"Neon Drive", data:"Neon Drive", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"76bd93a9-63aa-42fe-aea6-90de3c425a08.html"},
+{coverimage:"32e9abe6-d902-4747-9e05-761f44da080a/ad130262-7876-46e9-87e4-cade46810946.jpg", icon:"32e9abe6-d902-4747-9e05-761f44da080a/d5200238-79cc-482f-bfa5-99d241e5637f.ico", id:127, name:"NeuroVoider", data:"NeuroVoider", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"32e9abe6-d902-4747-9e05-761f44da080a.html"},
+{coverimage:"39e1150e-080a-4379-b11b-69f2253d4188/7894cda3-fc43-412c-b28a-042ebab706f2.jpg", icon:"39e1150e-080a-4379-b11b-69f2253d4188/982f1aca-cfe9-4bb0-b8e8-815c8696a8bb.ico", id:128, name:"Neverending Nightmares", data:"Neverending Nightmares", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"39e1150e-080a-4379-b11b-69f2253d4188.html"},
+{coverimage:"f6832649-1a58-47a6-a925-27c1872fc995/a7157390-b84b-421b-846c-80c5f56fe57c.jpg", icon:"f6832649-1a58-47a6-a925-27c1872fc995/a5003fd6-6491-4039-8283-08d82b01432c.ico", id:129, name:"Nex Machina", data:"Nex Machina", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f6832649-1a58-47a6-a925-27c1872fc995.html"},
+{coverimage:"2e42cb65-3864-45b1-80ae-71350222e4bb/a1de48d0-b9fa-4026-861c-b96713834b13.jpg", icon:"2e42cb65-3864-45b1-80ae-71350222e4bb/5fcd8b35-3bde-4f1d-ba6d-38ad095cf67e.ico", id:130, name:"Ninja Pizza Girl", data:"Ninja Pizza Girl", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"2e42cb65-3864-45b1-80ae-71350222e4bb.html"},
+{coverimage:"344f0ae2-b3a3-48c5-8c9a-55589ee2f7a2/8a681547-8f41-4cfa-8c85-69d80fea7513.jpg", icon:"344f0ae2-b3a3-48c5-8c9a-55589ee2f7a2/67b53e81-c4ce-4221-a5c9-1272799c3d15.ico", id:131, name:"No Time To Explain Remastered", data:"No Time To Explain Remastered", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"344f0ae2-b3a3-48c5-8c9a-55589ee2f7a2.html"},
+{coverimage:"389c1f50-2bfe-4dc4-b39a-b81a8d2f9e02/17e63380-bdd1-4146-ad60-2e846a72ec76.jpg", icon:"389c1f50-2bfe-4dc4-b39a-b81a8d2f9e02/a045cf07-e7e6-443e-8a0f-cb73226f538e.ico", id:132, name:"Nongunz: Doppelganger Edition", data:"Nongunz: Doppelganger Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"389c1f50-2bfe-4dc4-b39a-b81a8d2f9e02.html"},
+{coverimage:"407c27b4-4fa9-41b0-8310-8eeaada5a665/e814c1bc-f0a4-4b58-903c-b4c61300420f.jpg", icon:"407c27b4-4fa9-41b0-8310-8eeaada5a665/a374c1b3-a500-4889-932f-63c21be747c4.ico", id:133, name:"Nong&#252;nz", data:"Nong&#252;nz", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"407c27b4-4fa9-41b0-8310-8eeaada5a665.html"},
+{coverimage:"48b7573f-d149-4531-b5c8-a9e774825db2/0db526d1-18ba-4553-87fb-9b6f5e9b0d7b.jpg", icon:"48b7573f-d149-4531-b5c8-a9e774825db2/a75b5548-8e99-4a32-bd9a-4e1515b91809.ico", id:134, name:"Nuclear Throne", data:"Nuclear Throne", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"48b7573f-d149-4531-b5c8-a9e774825db2.html"},
+{coverimage:"8cc253f2-9d29-4cd9-aa7e-ae0412fe5788/b7eea2cc-9e37-4c98-a893-00c85f47fad2.jpg", icon:"8cc253f2-9d29-4cd9-aa7e-ae0412fe5788/8be5d189-df0e-4766-9fa3-a54d11916b6f.ico", id:135, name:"Observer", data:"Observer", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8cc253f2-9d29-4cd9-aa7e-ae0412fe5788.html"},
+{coverimage:"d1f79117-b962-4ba8-a069-0cc7933a89c3/16eecd45-80f9-4144-b615-9ca8f78ed273.jpg", icon:"d1f79117-b962-4ba8-a069-0cc7933a89c3/f733f166-5eb2-40d9-bd0e-06fe5fc4a8ef.ico", id:136, name:"Octodad: Dadliest Catch", data:"Octodad: Dadliest Catch", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d1f79117-b962-4ba8-a069-0cc7933a89c3.html"},
+{coverimage:"a7e28121-466b-4f83-8b9a-a6239c13b832/6619e708-9a55-48e6-b7e9-b5cd237d6170.jpg", icon:"a7e28121-466b-4f83-8b9a-a6239c13b832/98838596-d2a0-4369-af52-7df3be34da63.ico", id:137, name:"Old Man&#39;s Journey", data:"Old Man&#39;s Journey", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a7e28121-466b-4f83-8b9a-a6239c13b832.html"},
+{coverimage:"a24f063e-98bf-494c-9601-310bba42ac6d/d1fc8aed-9c00-4629-9ba3-f652ca94ccbe.jpg", icon:"a24f063e-98bf-494c-9601-310bba42ac6d/95737a56-5fc6-45a3-ad5e-21395eabe997.ico", id:138, name:"ONE PIECE BURNING BLOOD", data:"ONE PIECE BURNING BLOOD", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a24f063e-98bf-494c-9601-310bba42ac6d.html"},
+{coverimage:"e14a4d3f-0fc2-4304-9beb-422c170283e2/08653208-7eaf-4f52-8c1f-684239e9675b.jpg", icon:"e14a4d3f-0fc2-4304-9beb-422c170283e2/418d6223-3da5-4871-a81d-05521f0c13eb.ico", id:139, name:"Outlast 2", data:"Outlast 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e14a4d3f-0fc2-4304-9beb-422c170283e2.html"},
+{coverimage:"e5aea5e8-4474-4a73-93d4-56f21832382b/2f3fb0fe-5cd8-48cd-b5ab-965f2e48624e.jpg", icon:"e5aea5e8-4474-4a73-93d4-56f21832382b/61164016-bde8-432f-b8c7-59317b575aa6.ico", id:140, name:"Override", data:"Override", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e5aea5e8-4474-4a73-93d4-56f21832382b.html"},
+{coverimage:"920b8b6d-79b8-4135-8eeb-274540c9ee51/c5b646e1-2302-4524-982b-0739b05facd5.jpg", icon:"920b8b6d-79b8-4135-8eeb-274540c9ee51/18ef8b09-25a4-43a6-9d1e-a328f04506de.ico", id:141, name:"Paratopic", data:"Paratopic", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"920b8b6d-79b8-4135-8eeb-274540c9ee51.html"},
+{coverimage:"dc493b91-51fc-45d8-a706-e30051f39389/035e9516-9c28-4cd3-a8ea-f218da6f464b.jpg", icon:"dc493b91-51fc-45d8-a706-e30051f39389/d1e6d006-b0d6-4bf1-95a0-48bae5d76796.ico", id:142, name:"Passpartout: The Starving Artist", data:"Passpartout: The Starving Artist", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"dc493b91-51fc-45d8-a706-e30051f39389.html"},
+{coverimage:"ee64138d-ea77-4a7e-8106-de573f85fbd3/915074ef-12f8-4162-a0e7-52ad5c81bbfd.jpg", icon:"ee64138d-ea77-4a7e-8106-de573f85fbd3/c3dbef87-4581-438e-bc3a-c5a29bce74eb.ico", id:143, name:"Pathfinder: Kingmaker", data:"Pathfinder: Kingmaker", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"ee64138d-ea77-4a7e-8106-de573f85fbd3.html"},
+{coverimage:"6eaf47d1-b0e9-499f-916a-eedb3e85c709/b26586ea-f690-4929-a746-581b9c895fec.jpg", icon:"6eaf47d1-b0e9-499f-916a-eedb3e85c709/44d644be-e5f2-4705-b8cb-c0898f990c42.ico", id:144, name:"Plague Inc: Evolved", data:"Plague Inc: Evolved", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"6eaf47d1-b0e9-499f-916a-eedb3e85c709.html"},
+{coverimage:"4dea7ce1-03ae-4056-bdab-c3eadc80b55f/3408a047-763c-4fed-8f32-a05a229e1b73.jpg", icon:"4dea7ce1-03ae-4056-bdab-c3eadc80b55f/4b7838d1-3f33-48ac-b18f-ee6f976fba6f.ico", id:145, name:"Potatoman Seeks the Troof", data:"Potatoman Seeks the Troof", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"4dea7ce1-03ae-4056-bdab-c3eadc80b55f.html"},
+{coverimage:"c2283e64-4f00-4c0c-8749-818ee2d76f4e/e6e09604-7a4b-4fbc-890b-a2485688d406.jpg", icon:"c2283e64-4f00-4c0c-8749-818ee2d76f4e/6511e044-1add-4e71-b10f-f9342cd24bb5.ico", id:146, name:"Project CARS 2", data:"Project CARS 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"c2283e64-4f00-4c0c-8749-818ee2d76f4e.html"},
+{coverimage:"033b0b74-fe4d-4816-807b-753512a97fd1/86278338-c04d-4cb4-a45e-49f222983a48.jpg", icon:"033b0b74-fe4d-4816-807b-753512a97fd1/d4dac3ce-6f9d-419c-832c-54a15344cbe6.ico", id:147, name:"Purrfect Date", data:"Purrfect Date", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"033b0b74-fe4d-4816-807b-753512a97fd1.html"},
+{coverimage:"530ff963-2726-4bd4-b3bc-c40d2f6624ab/8f88e31a-af3d-4e80-97b8-ed57cf9d6679.jpg", icon:"530ff963-2726-4bd4-b3bc-c40d2f6624ab/d4770bfa-de9d-45fa-91f2-a2e989d10bd9.ico", id:148, name:"PUSS!", data:"PUSS!", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"530ff963-2726-4bd4-b3bc-c40d2f6624ab.html"},
+{coverimage:"d5700c5c-964d-472c-80ad-aeacbe829604/82e827c6-6c73-4c5c-bdd3-69e0c842188a.jpg", icon:"d5700c5c-964d-472c-80ad-aeacbe829604/a9e0ee62-32fe-4e25-af26-ed70c3878b2b.jpg", id:149, name:"Q.U.B.E.", data:"Q.U.B.E.", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d5700c5c-964d-472c-80ad-aeacbe829604.html"},
+{coverimage:"698364f2-c4b8-4dfa-9be7-da3028f48253/5967d389-c474-4319-beed-2cc0cc8ace98.jpg", icon:"698364f2-c4b8-4dfa-9be7-da3028f48253/2140cbaa-4db0-4ea6-a1fb-a8137e3f4a6a.ico", id:150, name:"Q.U.B.E. 2", data:"Q.U.B.E. 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"698364f2-c4b8-4dfa-9be7-da3028f48253.html"},
+{coverimage:"d5623c92-82e4-4e4e-812e-1a09804fcdce/9c159f7d-8e21-4113-afc0-81b30cddd45a.jpg", icon:"d5623c92-82e4-4e4e-812e-1a09804fcdce/ea55b575-02fc-420e-88c6-b56c51ed6079.ico", id:151, name:"Q.U.B.E: Director&#39;s Cut", data:"Q.U.B.E: Director&#39;s Cut", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d5623c92-82e4-4e4e-812e-1a09804fcdce.html"},
+{coverimage:"18e99431-6c77-47d7-9dd4-0a03920f28ac/9867de7c-4809-4be6-8713-c648bd82606e.jpg", icon:"18e99431-6c77-47d7-9dd4-0a03920f28ac/09d5e255-b353-428b-85dd-ba6d6d85c856.ico", id:152, name:"Quake Champions", data:"Quake Champions", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"18e99431-6c77-47d7-9dd4-0a03920f28ac.html"},
+{coverimage:"52819ebf-83c2-4481-83dc-0d04ac16e295/f0141aae-92a9-44ef-8ab9-3b8b57c2a3be.jpg", icon:"52819ebf-83c2-4481-83dc-0d04ac16e295/54038270-a52a-4531-9b72-fea3fab130f2.ico", id:153, name:"Quantum Break", data:"Quantum Break", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"52819ebf-83c2-4481-83dc-0d04ac16e295.html"},
+{coverimage:"489df453-571e-470c-b4fa-ec9731fc0ed5/adf86a38-bde7-4a0b-8a0e-07c99b7da9dd.jpg", icon:"489df453-571e-470c-b4fa-ec9731fc0ed5/67d4723f-1ab3-4504-b3af-914454cfa77a.ico", id:154, name:"Race The Sun", data:"Race The Sun", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"489df453-571e-470c-b4fa-ec9731fc0ed5.html"},
+{coverimage:"4045b095-ceb8-4f94-9279-39574f5aec6f/570a6ae5-fb81-4ae0-9a40-c569678cd536.jpg", icon:"4045b095-ceb8-4f94-9279-39574f5aec6f/1d50024e-12b7-408e-90a5-08f2e391c4ca.ico", id:155, name:"Rapture Rejects", data:"Rapture Rejects", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"4045b095-ceb8-4f94-9279-39574f5aec6f.html"},
+{coverimage:"92843958-69f2-4458-a8f8-918334aaf57b/e6f5d31f-ea1d-4c98-b381-b580da64f548.jpg", icon:"92843958-69f2-4458-a8f8-918334aaf57b/18c5ac47-0576-44ee-9130-1873325427e1.ico", id:156, name:"Receiver", data:"Receiver", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"92843958-69f2-4458-a8f8-918334aaf57b.html"},
+{coverimage:"f587288a-968c-43d6-a333-0f1fea79b052/865c6b24-7478-4bba-8b0b-ce822a8fa964.jpg", icon:"f587288a-968c-43d6-a333-0f1fea79b052/41db7d8b-75d7-4ca0-8b9d-4ac8b122b281.ico", id:157, name:"Regions Of Ruin", data:"Regions Of Ruin", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f587288a-968c-43d6-a333-0f1fea79b052.html"},
+{coverimage:"6fd9ac97-d8ac-42df-a64a-8840344626ff/677cdaf7-de81-4f5e-a02e-edeeaf6dd599.jpg", icon:"6fd9ac97-d8ac-42df-a64a-8840344626ff/aae6efb5-cca5-4b92-a0fc-47b91c282f75.ico", id:158, name:"Regular Human Basketball", data:"Regular Human Basketball", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"6fd9ac97-d8ac-42df-a64a-8840344626ff.html"},
+{coverimage:"e7a3f71c-f330-45b0-ae66-af6548455a81/4b1af9e3-6b7a-4f1f-bda2-03745e8fa2ff.jpg", icon:"e7a3f71c-f330-45b0-ae66-af6548455a81/d48385c4-cc86-41d0-8091-002e7b94be90.ico", id:159, name:"Remnants of Isolation", data:"Remnants of Isolation", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e7a3f71c-f330-45b0-ae66-af6548455a81.html"},
+{coverimage:"957c8bdc-1730-4b3d-9a5b-7da3f3a3bb70/54601653-63c4-4467-9493-2297c41d4365.jpg", icon:"957c8bdc-1730-4b3d-9a5b-7da3f3a3bb70/8c3c6113-c913-4983-bf96-4639c4e18537.ico", id:160, name:"Resident Evil 5", data:"Resident Evil 5", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"957c8bdc-1730-4b3d-9a5b-7da3f3a3bb70.html"},
+{coverimage:"d4b36393-67ce-4950-84b6-5ff8c0f2e765/4a1f13e4-f1e1-4c02-bbca-8ad2ac056cbc.jpg", icon:"d4b36393-67ce-4950-84b6-5ff8c0f2e765/3bb4ef56-25ca-4980-a737-de1e2ce75662.ico", id:161, name:"Resident Evil Revelations", data:"Resident Evil Revelations", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d4b36393-67ce-4950-84b6-5ff8c0f2e765.html"},
+{coverimage:"2bdf94c9-97fd-491d-aa83-04f0242bb6b4/3541f551-ee21-4181-b4d0-db18528904d3.jpg", icon:"2bdf94c9-97fd-491d-aa83-04f0242bb6b4/a35bf681-0c94-4f26-b723-1a8424286ed6.ico", id:162, name:"Retro Game Crunch", data:"Retro Game Crunch", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"2bdf94c9-97fd-491d-aa83-04f0242bb6b4.html"},
+{coverimage:"c50257d8-c3f4-47ff-b354-fd6d6da3181d/8f6dc2f0-e78c-4488-ad52-06ab19d2191c.jpg", icon:"c50257d8-c3f4-47ff-b354-fd6d6da3181d/955e5734-fdcb-497c-bd6d-124cff9dca8d.ico", id:163, name:"Rituals", data:"Rituals", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"c50257d8-c3f4-47ff-b354-fd6d6da3181d.html"},
+{coverimage:"e945aabd-df50-4761-8bc4-d3905da8aa53/1210d796-9160-4b4d-958c-6e94ce77d2b5.jpg", icon:"e945aabd-df50-4761-8bc4-d3905da8aa53/d5eb9cb1-bde8-489e-a6a0-9037eb12b446.ico", id:164, name:"Road Redemption", data:"Road Redemption", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e945aabd-df50-4761-8bc4-d3905da8aa53.html"},
+{coverimage:"647ee4f8-8a5d-4e61-9b2f-531a145d9582/3c3d568b-99e6-41eb-967a-55a590b414f3.jpg", icon:"647ee4f8-8a5d-4e61-9b2f-531a145d9582/2c8d3777-0ee2-4d1b-9f7d-f13989ce02f1.ico", id:165, name:"Robot Roller-Derby Disco Dodgeball", data:"Robot Roller-Derby Disco Dodgeball", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"647ee4f8-8a5d-4e61-9b2f-531a145d9582.html"},
+{coverimage:"5f10bed8-8419-4757-b1e4-ccb78fbbd581/5e5acc0d-9aa7-40f8-aad6-8664490c0a73.jpg", icon:"5f10bed8-8419-4757-b1e4-ccb78fbbd581/dfc5bb05-de15-4cf4-87d1-174c90eac80f.ico", id:166, name:"Rock of Ages 2", data:"Rock of Ages 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"5f10bed8-8419-4757-b1e4-ccb78fbbd581.html"},
+{coverimage:"23ae6410-4d73-4e3e-8ff1-abfb1cb63c50/8298a200-e864-449c-8ba2-4c23e5e8a403.jpg", icon:"23ae6410-4d73-4e3e-8ff1-abfb1cb63c50/ac3f6a9f-68b2-48f3-a707-1031c8d7cca7.ico", id:167, name:"Rocketbirds: Hardboiled Chicken", data:"Rocketbirds: Hardboiled Chicken", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"23ae6410-4d73-4e3e-8ff1-abfb1cb63c50.html"},
+{coverimage:"2cb3a21a-1361-422e-8044-10665339dc34/81baef9f-e2f8-4448-9dd2-37a9512a6a2d.jpg", icon:"2cb3a21a-1361-422e-8044-10665339dc34/1dedb96e-d774-4881-b46b-cc453a64dab9.ico", id:168, name:"ROCKETSROCKETSROCKETS", data:"ROCKETSROCKETSROCKETS", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"2cb3a21a-1361-422e-8044-10665339dc34.html"},
+{coverimage:"7250587f-6b7a-48ed-9ec7-46c2ae078112/d6b0d8b3-5bf3-4fab-8130-48b74024720f.jpg", icon:"7250587f-6b7a-48ed-9ec7-46c2ae078112/598c5a02-1543-4fe5-bff2-0c794e5e7006.ico", id:169, name:"RPG Maker VX Ace", data:"RPG Maker VX Ace", lastactivity:"Today", addeddate:"9/2/2024", playtime:"1h 25m 0s", source:"Steam", platform:"PC (Windows)", gamefile:"7250587f-6b7a-48ed-9ec7-46c2ae078112.html"},
+{coverimage:"68e1eefe-bc20-4e6a-a793-58eeceac0154/0e6ad162-1140-4e90-8d66-9abcdd67059d.jpg", icon:"68e1eefe-bc20-4e6a-a793-58eeceac0154/0360c349-fe81-4236-bf76-cac23585b534.ico", id:170, name:"RUINER", data:"RUINER", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"68e1eefe-bc20-4e6a-a793-58eeceac0154.html"},
+{coverimage:"bb6da547-56db-4e7d-818a-f54355222f0d/14f02f78-51e1-44b4-ae09-67c44d1acde5.jpg", icon:"bb6da547-56db-4e7d-818a-f54355222f0d/0d8c4838-cc36-4de3-81c4-6246cc0b73a2.ico", id:171, name:"Runa &amp; the Chaikur&#250; Legacy", data:"Runa &amp; the Chaikur&#250; Legacy", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"bb6da547-56db-4e7d-818a-f54355222f0d.html"},
+{coverimage:"ddfd5494-8c51-4ab4-8b88-d7846605f936/23c58c06-bcc0-4d87-9fe3-6bf97bda5417.jpg", icon:"ddfd5494-8c51-4ab4-8b88-d7846605f936/bc45a041-d36f-40bf-8bc5-d58b8656b555.ico", id:172, name:"RUNNING WITH RIFLES", data:"RUNNING WITH RIFLES", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"ddfd5494-8c51-4ab4-8b88-d7846605f936.html"},
+{coverimage:"ab412e50-bc5c-4424-a960-3544139d5f9b/3a5d551f-ff6c-48a1-ab01-bc61737239b9.jpg", icon:"ab412e50-bc5c-4424-a960-3544139d5f9b/8cd4dcde-2c09-4f8b-9563-49058416c1c2.ico", id:173, name:"Seasons after Fall", data:"Seasons after Fall", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"ab412e50-bc5c-4424-a960-3544139d5f9b.html"},
+{coverimage:"664e0ee0-3caa-4097-8e10-adeb78d57512/026d6b9b-eb53-496f-b874-29489d9e2b8e.jpg", icon:"664e0ee0-3caa-4097-8e10-adeb78d57512/a7c2e707-b8b5-4ccf-8def-3232c35f5e78.ico", id:174, name:"Secret of the Magic Crystal", data:"Secret of the Magic Crystal", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"664e0ee0-3caa-4097-8e10-adeb78d57512.html"},
+{coverimage:"a57c77c3-d2a6-41a2-9359-80fd7da2c517/c34ee554-c3d2-4185-abbc-c2cc5c86bf5d.jpg", icon:"a57c77c3-d2a6-41a2-9359-80fd7da2c517/f84ebe82-f4f3-49ce-acd2-55241a39429d.ico", id:175, name:"Secrets of R&#230;tikon", data:"Secrets of R&#230;tikon", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a57c77c3-d2a6-41a2-9359-80fd7da2c517.html"},
+{coverimage:"7891e6f2-1ec3-410f-9822-1d4675da5fcb/71a56484-176a-41ca-b5d2-818ebc0e575d.jpg", icon:"7891e6f2-1ec3-410f-9822-1d4675da5fcb/0922c9c7-7a85-410e-8a45-338b5f7e9b5c.ico", id:176, name:"Seven: Enhanced Edition", data:"Seven: Enhanced Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"7891e6f2-1ec3-410f-9822-1d4675da5fcb.html"},
+{coverimage:"e4189426-f059-4ef1-8710-6d5fa59c071f/48f5108b-14dd-4880-bf27-d276aa446407.jpg", icon:"e4189426-f059-4ef1-8710-6d5fa59c071f/f749f206-0176-4973-8f06-827c5d8b5241.ico", id:177, name:"She Remembered Caterpillars", data:"She Remembered Caterpillars", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e4189426-f059-4ef1-8710-6d5fa59c071f.html"},
+{coverimage:"c4ba3412-b769-4e80-848b-00c16dacf76c/25706db5-5125-484e-9902-ea1735a215ae.jpg", icon:"c4ba3412-b769-4e80-848b-00c16dacf76c/ec503eb8-796e-4ddd-bd0d-828d0bca81ae.ico", id:178, name:"Shenmue I &amp; II", data:"Shenmue I &amp; II", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"c4ba3412-b769-4e80-848b-00c16dacf76c.html"},
+{coverimage:"0a9e0eec-e066-4b4c-adfb-da77dcc1673c/ca7a3308-4eec-491c-be42-1da5888b8d24.jpg", icon:"0a9e0eec-e066-4b4c-adfb-da77dcc1673c/f5cfb324-9fff-499d-906c-eced2d9b751f.ico", id:179, name:"Shutshimi", data:"Shutshimi", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"0a9e0eec-e066-4b4c-adfb-da77dcc1673c.html"},
+{coverimage:"238d58d8-b3b5-4cbc-b64d-39f2a3e56a6d/3782614e-149f-4298-9ebb-697ec708aaa9.jpg", icon:"238d58d8-b3b5-4cbc-b64d-39f2a3e56a6d/94991c54-c3b5-44ae-9eb3-0bdb2a083fed.ico", id:180, name:"Silence", data:"Silence", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"238d58d8-b3b5-4cbc-b64d-39f2a3e56a6d.html"},
+{coverimage:"58c559a6-1150-406e-98f0-09574e1c24d7/c40035a9-05d7-4a7a-b11c-d7d901645639.jpg", icon:"58c559a6-1150-406e-98f0-09574e1c24d7/5ff13920-91ef-4e84-840c-f7efafe80caf.ico", id:181, name:"Slay the Spire", data:"Slay the Spire", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"58c559a6-1150-406e-98f0-09574e1c24d7.html"},
+{coverimage:"d87cd586-202b-4ff7-b57b-f329087fcdd6/8e92cfa0-8e5f-4472-936f-0c775872c769.jpg", icon:"d87cd586-202b-4ff7-b57b-f329087fcdd6/ef5be18e-1cc8-4871-ab87-1218f84d4083.ico", id:182, name:"Snake Pass", data:"Snake Pass", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d87cd586-202b-4ff7-b57b-f329087fcdd6.html"},
+{coverimage:"abbd627f-449c-40da-b668-1fd3af7dab3d/9fcddb0f-d5e4-476f-bd0d-55c004a8d81a.jpg", icon:"abbd627f-449c-40da-b668-1fd3af7dab3d/b4beceba-8395-4295-a251-18e20ede13ea.ico", id:183, name:"Sniper Elite 3", data:"Sniper Elite 3", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"abbd627f-449c-40da-b668-1fd3af7dab3d.html"},
+{coverimage:"9be97683-cba2-486f-9ed0-9207edf223db/5dabdde2-cc2b-4685-b54a-cb03171eb729.jpg", icon:"9be97683-cba2-486f-9ed0-9207edf223db/c22f3234-dd90-4df0-a4a0-b6f8e0654f5d.ico", id:184, name:"Song of the Deep", data:"Song of the Deep", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"9be97683-cba2-486f-9ed0-9207edf223db.html"},
+{coverimage:"54deccbe-fcd4-4a57-93c7-ab07557d1c2a/9ddad95c-f006-430c-bc72-423ac5d6c612.jpg", icon:"54deccbe-fcd4-4a57-93c7-ab07557d1c2a/478477d9-80e5-4005-92c3-a30e3144cacd.ico", id:185, name:"Sonic Mania", data:"Sonic Mania", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"54deccbe-fcd4-4a57-93c7-ab07557d1c2a.html"},
+{coverimage:"671ef796-1dae-4299-87b7-ccd6f1d67e1e/1d63151d-34d3-47af-a787-423269392e08.jpg", icon:"671ef796-1dae-4299-87b7-ccd6f1d67e1e/bf7e31dc-1cb5-467b-afba-351ca3927969.ico", id:186, name:"SOULCALIBUR VI", data:"SOULCALIBUR VI", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"671ef796-1dae-4299-87b7-ccd6f1d67e1e.html"},
+{coverimage:"a3e09afa-763c-4197-a426-1ea956e0404e/4eb6bf01-3290-47b9-bd2b-07a813fb6065.jpg", icon:"a3e09afa-763c-4197-a426-1ea956e0404e/257db689-9341-4a86-be16-ee1a5eb3a676.ico", id:187, name:"Spirits", data:"Spirits", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a3e09afa-763c-4197-a426-1ea956e0404e.html"},
+{coverimage:"1d45604d-0b43-48e7-82f6-253a41782b83/8cf32069-a125-43e5-8dbe-49389149b579.jpg", icon:"1d45604d-0b43-48e7-82f6-253a41782b83/f48433ef-5bf1-4932-8723-b16d9c050692.ico", id:188, name:"Splasher", data:"Splasher", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"1d45604d-0b43-48e7-82f6-253a41782b83.html"},
+{coverimage:"6c81fbe5-4f48-45ff-bb0d-131d97514c94/ffaed070-c0f8-4fd7-bdcc-e5ba4ef91127.jpg", icon:"6c81fbe5-4f48-45ff-bb0d-131d97514c94/7bb92876-48a4-45ff-aa11-eeefba636ee4.ico", id:189, name:"Spoiler Alert", data:"Spoiler Alert", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"6c81fbe5-4f48-45ff-bb0d-131d97514c94.html"},
+{coverimage:"31d51f17-a3c1-4a5a-a210-990246012540/645e52b4-8fed-4430-a835-d123c6d3cc20.jpg", icon:"31d51f17-a3c1-4a5a-a210-990246012540/a1f46be4-4ef6-420c-a0ae-79620264a9ef.ico", id:190, name:"Spyro Reignited Trilogy", data:"Spyro Reignited Trilogy", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"31d51f17-a3c1-4a5a-a210-990246012540.html"},
+{coverimage:"7dd36166-e2f0-4301-9425-fc12c2ba7c91/a11fae65-9aac-4d57-b877-ec460caf19ed.jpg", icon:"7dd36166-e2f0-4301-9425-fc12c2ba7c91/f7c76e43-4454-4036-a6d6-a2a8d96a4abc.ico", id:191, name:"SteamWorld Dig", data:"SteamWorld Dig", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"7dd36166-e2f0-4301-9425-fc12c2ba7c91.html"},
+{coverimage:"17e6b8f3-1218-4f29-a9cf-0c5b9af9b4c1/555ee3bb-f844-43f7-95da-d5359cfa6480.jpg", icon:"17e6b8f3-1218-4f29-a9cf-0c5b9af9b4c1/b64b9dfb-58ba-4388-8d46-7e38e64a33b3.ico", id:192, name:"Steel Rats", data:"Steel Rats", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"17e6b8f3-1218-4f29-a9cf-0c5b9af9b4c1.html"},
+{coverimage:"f5bb5027-dcf5-4432-85cd-0bf01b6fa0f2/548c38c1-f937-4858-9b47-76180b492495.jpg", icon:"f5bb5027-dcf5-4432-85cd-0bf01b6fa0f2/621a0769-34e0-4691-86bd-aa832d78ac48.ico", id:193, name:"Stories Untold", data:"Stories Untold", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f5bb5027-dcf5-4432-85cd-0bf01b6fa0f2.html"},
+{coverimage:"2f9d4188-fbc3-4449-90cf-012d7f1ccb5e/824ad5f3-0268-4be1-8a79-a801a969f2c5.jpg", icon:"2f9d4188-fbc3-4449-90cf-012d7f1ccb5e/f4052160-57b8-4d95-8369-243f7d109801.ico", id:194, name:"STRAFE: Gold Edition", data:"STRAFE: Gold Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"2f9d4188-fbc3-4449-90cf-012d7f1ccb5e.html"},
+{coverimage:"27d94316-caaf-428d-9f01-30cd4b047ee7/bf871094-2a42-41a0-88fd-32d9b12377be.jpg", icon:"27d94316-caaf-428d-9f01-30cd4b047ee7/b60069a4-422c-4f9c-bea6-29201e83d2c9.ico", id:195, name:"Strata", data:"Strata", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"27d94316-caaf-428d-9f01-30cd4b047ee7.html"},
+{coverimage:"2b7a580f-4a07-40ae-bb9b-6c0606930a0e/8d1bb5fa-c89a-4ca7-bade-b7e8ab6f6c61.jpg", icon:"2b7a580f-4a07-40ae-bb9b-6c0606930a0e/4dc6240a-c5e5-4c6b-9e3c-0c55878bc65d.ico", id:196, name:"Streamline", data:"Streamline", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"2b7a580f-4a07-40ae-bb9b-6c0606930a0e.html"},
+{coverimage:"f115ebe0-26d0-4d15-aab8-848483e61707/4f34c897-0f02-46ee-9bf2-ba2890e60009.jpg", icon:"f115ebe0-26d0-4d15-aab8-848483e61707/8f8f1016-0d4e-40af-bf24-45dd8a50885d.ico", id:197, name:"Styx: Shards of Darkness", data:"Styx: Shards of Darkness", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f115ebe0-26d0-4d15-aab8-848483e61707.html"},
+{coverimage:"05d495de-78bf-4a06-bc8f-5dfee91fd05a/ff9b9e80-934b-40ae-93e7-3e78928a6ff8.jpg", icon:"05d495de-78bf-4a06-bc8f-5dfee91fd05a/4948519b-1692-459a-88df-fb530f70ba7b.ico", id:198, name:"Subnautica", data:"Subnautica", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"05d495de-78bf-4a06-bc8f-5dfee91fd05a.html"},
+{coverimage:"6b4884c5-17df-4067-8eb0-e5203eea7515/2e231783-5584-48c5-9504-388641c5c036.jpg", icon:"6b4884c5-17df-4067-8eb0-e5203eea7515/3c387764-9232-436d-86ab-a3fbde4937cc.ico", id:199, name:"Subterrain", data:"Subterrain", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"6b4884c5-17df-4067-8eb0-e5203eea7515.html"},
+{coverimage:"58933a17-c7dd-4b9c-b2a5-3778d7630462/b62fddc8-5986-4046-aa89-8b1247c01f2b.jpg", icon:"58933a17-c7dd-4b9c-b2a5-3778d7630462/f644e6a4-28e6-498e-a1ad-a00a1d55e493.ico", id:200, name:"Summoner", data:"Summoner", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"58933a17-c7dd-4b9c-b2a5-3778d7630462.html"},
+{coverimage:"9e87ebe3-3f99-474f-9044-e99aa185fd32/e683c827-b0a1-44f5-860d-db9e8ede6670.jpg", icon:"9e87ebe3-3f99-474f-9044-e99aa185fd32/6db4aab0-322a-4fb8-93ff-e382271b80b7.ico", id:201, name:"Sundered: Eldritch Edition", data:"Sundered: Eldritch Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"9e87ebe3-3f99-474f-9044-e99aa185fd32.html"},
+{coverimage:"85a11bee-1db9-4b77-9fee-bbfddb5d3ec6/9c875148-85c6-4c3a-a736-92fddc12fa32.jpg", icon:"85a11bee-1db9-4b77-9fee-bbfddb5d3ec6/b2e1a723-366d-41c3-9a10-62902ef26495.ico", id:202, name:"Super Daryl Deluxe", data:"Super Daryl Deluxe", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"85a11bee-1db9-4b77-9fee-bbfddb5d3ec6.html"},
+{coverimage:"2397a6b4-abe0-4f02-b246-e55ff12ca131/d4662acc-8e12-416d-a9f7-7c2a3b47de4e.jpg", icon:"2397a6b4-abe0-4f02-b246-e55ff12ca131/51bbc100-329f-495c-b85c-b7917888551a.ico", id:203, name:"Super Galaxy Squadron EX Turbo", data:"Super Galaxy Squadron EX Turbo", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"2397a6b4-abe0-4f02-b246-e55ff12ca131.html"},
+{coverimage:"1bffad42-7bb3-4bad-abb4-f081c922a065/42187108-2810-44c6-a8cf-ca23b996cad9.jpg", icon:"1bffad42-7bb3-4bad-abb4-f081c922a065/5acb071b-77ca-4e73-8994-a642dbf29e84.ico", id:204, name:"Super Hexagon", data:"Super Hexagon", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"1bffad42-7bb3-4bad-abb4-f081c922a065.html"},
+{coverimage:"876a4761-1697-4f8e-bb27-a4a206cd24d5/8987a20f-6bf6-4118-b054-64234da5059b.jpg", icon:"876a4761-1697-4f8e-bb27-a4a206cd24d5/09a34bd7-0954-48b0-ad00-bbdfc5cb503b.ico", id:205, name:"Supreme Commander", data:"Supreme Commander", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"876a4761-1697-4f8e-bb27-a4a206cd24d5.html"},
+{coverimage:"328ed750-0375-41e6-843a-1a14e894eb7b/4887ad10-06ad-4f86-b418-ee59132a22d4.jpg", icon:"328ed750-0375-41e6-843a-1a14e894eb7b/d685adab-5127-4180-a81d-689f9a0874a2.ico", id:206, name:"Supreme Commander: Forged Alliance", data:"Supreme Commander: Forged Alliance", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"328ed750-0375-41e6-843a-1a14e894eb7b.html"},
+{coverimage:"11526a80-2d5c-4503-8332-a51ccb1583a4/73ed2410-ad66-44b0-a604-79f4e8f8c539.jpg", icon:"11526a80-2d5c-4503-8332-a51ccb1583a4/7357d865-f678-4148-a673-7cd8e69da2dc.ico", id:207, name:"Sword Legacy Omen", data:"Sword Legacy Omen", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"11526a80-2d5c-4503-8332-a51ccb1583a4.html"},
+{coverimage:"aa9e80f3-0778-49e4-a817-738c442475b5/9c3f87e6-edff-4d7e-b52a-c37ef87aa005.jpg", icon:"aa9e80f3-0778-49e4-a817-738c442475b5/5fc7aace-2cab-4b30-82e5-cce641fa58b1.ico", id:208, name:"Symphony", data:"Symphony", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"aa9e80f3-0778-49e4-a817-738c442475b5.html"},
+{coverimage:"e90adfdb-f0e3-4fbe-9890-7064da81244a/a390470d-b192-499e-ad20-ad105750fb56.jpg", icon:"e90adfdb-f0e3-4fbe-9890-7064da81244a/66471a15-3500-4b18-b96f-3d1c02ed6dba.ico", id:209, name:"SYNTHETIK", data:"SYNTHETIK", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"e90adfdb-f0e3-4fbe-9890-7064da81244a.html"},
+{coverimage:"5bbd5652-eae3-4cbb-aad4-5930fdc80e33/537dbcf2-26db-4985-b490-9da749e952c6.jpg", icon:"5bbd5652-eae3-4cbb-aad4-5930fdc80e33/9c69b7bd-0588-48dd-8f7b-bf225703c701.ico", id:210, name:"System Shock 2", data:"System Shock 2", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"5bbd5652-eae3-4cbb-aad4-5930fdc80e33.html"},
+{coverimage:"8047fd04-1b6b-4676-bbd3-159923bde549/84159d78-a626-474f-af09-efc80ddbd2a3.jpg", icon:"8047fd04-1b6b-4676-bbd3-159923bde549/daad973b-ef75-44b3-95a1-ef957af07b0c.ico", id:211, name:"System Shock: Classic", data:"System Shock: Classic", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8047fd04-1b6b-4676-bbd3-159923bde549.html"},
+{coverimage:"ad8cdda6-ee54-4a94-b364-493706e61ace/76e5ed01-430c-429d-86db-bf1d46fcccfa.jpg", icon:"ad8cdda6-ee54-4a94-b364-493706e61ace/77e26f94-4f4e-4b06-815e-32bb482aebd8.ico", id:212, name:"System Shock: Enhanced Edition", data:"System Shock: Enhanced Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"ad8cdda6-ee54-4a94-b364-493706e61ace.html"},
+{coverimage:"dfcace88-d954-45b3-a499-b54077246b63/03fe1576-5257-4b71-b1fc-ee87be8bc96c.jpg", icon:"dfcace88-d954-45b3-a499-b54077246b63/f27c89fb-0ee6-43e5-b53e-efb93854f7a7.ico", id:213, name:"Tacoma", data:"Tacoma", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"dfcace88-d954-45b3-a499-b54077246b63.html"},
+{coverimage:"fb454ec1-53b4-424d-82d8-b8e4322c84f9/3ea1121a-4c77-4644-9302-938e2bab223a.jpg", icon:"fb454ec1-53b4-424d-82d8-b8e4322c84f9/b1a8bb8f-ef38-48db-a78d-04bf67ac26c3.ico", id:214, name:"Tales of Berseria", data:"Tales of Berseria", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"fb454ec1-53b4-424d-82d8-b8e4322c84f9.html"},
+{coverimage:"8deedceb-e7da-42f8-a6c5-bf5c918f2ba1/e442ccb2-915e-4e29-bc9b-bc0786b72d27.jpg", icon:"8deedceb-e7da-42f8-a6c5-bf5c918f2ba1/f2a83965-39eb-4369-8bd3-192b3341ccfc.ico", id:215, name:"Tannenberg", data:"Tannenberg", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8deedceb-e7da-42f8-a6c5-bf5c918f2ba1.html"},
+{coverimage:"722ccb68-b67c-42f2-a280-87a09ebcc3d8/48ada7bd-72e8-4799-a9e2-a06e99f62c8b.jpg", icon:"722ccb68-b67c-42f2-a280-87a09ebcc3d8/94229835-b274-4ec9-a7c7-cdfbd26244c4.ico", id:216, name:"Team Indie", data:"Team Indie", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"722ccb68-b67c-42f2-a280-87a09ebcc3d8.html"},
+{coverimage:"77f53c8a-3e2b-479a-ad47-b8fe564bd801/28973185-b73d-4907-b97b-fb4edcc1b6c6.jpg", icon:"77f53c8a-3e2b-479a-ad47-b8fe564bd801/e153989c-e364-46b8-9f4b-4467d9b403ec.ico", id:217, name:"Teslagrad", data:"Teslagrad", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"77f53c8a-3e2b-479a-ad47-b8fe564bd801.html"},
+{coverimage:"d3c1c655-dae1-4eaa-b6e6-a59b9d7a40d0/d144216f-8a43-4565-b2df-8ec234e3262f.jpg", icon:"d3c1c655-dae1-4eaa-b6e6-a59b9d7a40d0/92cc1455-d688-40b2-a3b0-9c00f2f55962.ico", id:218, name:"Tharsis", data:"Tharsis", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d3c1c655-dae1-4eaa-b6e6-a59b9d7a40d0.html"},
+{coverimage:"4cffa719-fa23-4a51-b276-90d7423ef296/18294c86-9ab6-4ba4-b51a-fa6b8106dd71.jpg", icon:"4cffa719-fa23-4a51-b276-90d7423ef296/11be89b1-7d6b-4439-b1b1-0817f25862cf.ico", id:219, name:"The Beginner&#39;s Guide", data:"The Beginner&#39;s Guide", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"4cffa719-fa23-4a51-b276-90d7423ef296.html"},
+{coverimage:"9e5499b8-1810-44a9-a698-9fa5965459b0/ccc7a7cb-9be6-4ff8-8001-4e8cd43c96ef.jpg", icon:"9e5499b8-1810-44a9-a698-9fa5965459b0/1de47726-f409-4b6e-858e-8c115e01b91d.ico", id:220, name:"The Bridge", data:"The Bridge", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"9e5499b8-1810-44a9-a698-9fa5965459b0.html"},
+{coverimage:"df9f4ac4-8490-4442-9b08-29a1353f5302/fdabf462-afd2-4464-a6f5-7ddff05ea292.jpg", icon:"df9f4ac4-8490-4442-9b08-29a1353f5302/561569ed-21e0-4814-a3a3-3bf0e4244064.ico", id:221, name:"The Darkside Detective", data:"The Darkside Detective", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"df9f4ac4-8490-4442-9b08-29a1353f5302.html"},
+{coverimage:"13aa84d3-0674-4b0d-801f-c7c3592e18ae/a48788af-5816-4513-9ba5-68a41405f08d.jpg", icon:"13aa84d3-0674-4b0d-801f-c7c3592e18ae/516cda75-26bf-4ec1-ab07-fd3f723ca898.ico", id:222, name:"The Dwarves", data:"The Dwarves", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"13aa84d3-0674-4b0d-801f-c7c3592e18ae.html"},
+{coverimage:"d40b021e-11d6-418b-bcc2-3ed98af02078/d4a235ba-d4be-4042-a85a-45fc9d77a610.jpg", icon:"d40b021e-11d6-418b-bcc2-3ed98af02078/596a71c1-e428-4103-a567-2d71df757694.ico", id:223, name:"The Sexy Brutale", data:"The Sexy Brutale", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d40b021e-11d6-418b-bcc2-3ed98af02078.html"},
+{coverimage:"d75767b0-e46a-40de-9067-e88cfeb8928e/aebe575c-4eda-47e9-bd65-d08305b0d7d1.jpg", icon:"d75767b0-e46a-40de-9067-e88cfeb8928e/434da5cb-4043-4ae9-94b9-dc08708f75fe.ico", id:224, name:"The Shrouded Isle", data:"The Shrouded Isle", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"d75767b0-e46a-40de-9067-e88cfeb8928e.html"},
+{coverimage:"5b89f9dd-08d8-4db8-8df3-e32f4ed6788e/b52c3627-3319-4d44-89e9-5e4c5ff2debd.jpg", icon:"5b89f9dd-08d8-4db8-8df3-e32f4ed6788e/3f8a2ca7-3cc2-458c-a087-2f7b171f1fa3.ico", id:225, name:"The Spiral Scouts", data:"The Spiral Scouts", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"5b89f9dd-08d8-4db8-8df3-e32f4ed6788e.html"},
+{coverimage:"17ca1ee2-e18a-47a1-8ed5-a47d37573570/8f142172-1329-4532-80d3-9132bc4f21a8.jpg", icon:"17ca1ee2-e18a-47a1-8ed5-a47d37573570/59c64cdd-b7b1-4f0c-afba-0396b4f49a84.ico", id:226, name:"TIMEframe", data:"TIMEframe", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"17ca1ee2-e18a-47a1-8ed5-a47d37573570.html"},
+{coverimage:"4aa341e1-b260-414b-92ea-756b7831e9e5/cb8c36dc-37ab-4ca0-867f-22b61a150beb.jpg", icon:"4aa341e1-b260-414b-92ea-756b7831e9e5/9541fb10-1601-4098-9dcf-b5e6ce8d81a3.ico", id:227, name:"TinyKeep", data:"TinyKeep", lastactivity:"Today", addeddate:"9/2/2024", playtime:"32m 0s", source:"Steam", platform:"PC (Windows)", gamefile:"4aa341e1-b260-414b-92ea-756b7831e9e5.html"},
+{coverimage:"71822221-6eba-4f46-8c84-02fb5150181e/a19570e7-4716-4799-ade1-e13bf20db979.jpg", icon:"71822221-6eba-4f46-8c84-02fb5150181e/b14d2449-ef4a-419e-a5b4-9d110fcd13bf.ico", id:228, name:"Titan Quest: Immortal Throne", data:"Titan Quest: Immortal Throne", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"71822221-6eba-4f46-8c84-02fb5150181e.html"},
+{coverimage:"8c3956ac-0c20-40bf-ba46-bfcdc6d28be7/a61b3c76-6c7c-4345-aff2-6e46a84241dc.jpg", icon:"8c3956ac-0c20-40bf-ba46-bfcdc6d28be7/61196487-4efc-4bfc-b11b-d4e558fb061d.ico", id:229, name:"Tower of Guns", data:"Tower of Guns", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8c3956ac-0c20-40bf-ba46-bfcdc6d28be7.html"},
+{coverimage:"68c456b0-e56f-4515-b277-56886c9e4c0a/b48b2f19-3bae-4cfb-9d04-a75c38a6a303.jpg", icon:"68c456b0-e56f-4515-b277-56886c9e4c0a/f47213e5-ef5e-4b1f-9da6-4896e372e541.ico", id:230, name:"Waking Mars", data:"Waking Mars", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"68c456b0-e56f-4515-b277-56886c9e4c0a.html"},
+{coverimage:"73e7fda7-ef1e-4967-978c-baae95d9e292/81a99a5d-8464-458d-9a7e-882ccf645382.jpg", icon:"73e7fda7-ef1e-4967-978c-baae95d9e292/e23ccf77-592d-4171-9fac-ed83c0de6654.ico", id:231, name:"War for the Overworld", data:"War for the Overworld", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"73e7fda7-ef1e-4967-978c-baae95d9e292.html"},
+{coverimage:"39256d05-df31-48b4-b93c-0c92428bec3a/07fb8171-9598-4c18-9efb-c6d3533d793b.jpg", icon:"39256d05-df31-48b4-b93c-0c92428bec3a/31045d71-397c-4a6a-b68d-5576dd299389.ico", id:232, name:"Wargame: Red Dragon", data:"Wargame: Red Dragon", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"39256d05-df31-48b4-b93c-0c92428bec3a.html"},
+{coverimage:"77a9b242-a497-45c7-91a2-93d6025c08a9/57a89199-f7a3-4c0f-a9b7-ebad40ca51e9.jpg", icon:"77a9b242-a497-45c7-91a2-93d6025c08a9/86fb1def-d32d-472a-bd0d-23950c5965ca.ico", id:233, name:"Warhammer 40,000: Dawn of War III", data:"Warhammer 40,000: Dawn of War III", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"77a9b242-a497-45c7-91a2-93d6025c08a9.html"},
+{coverimage:"0e15053d-b955-48e5-b6c0-130d5028fd53/42e8cbb5-a25e-4c50-ab49-324750039ea7.jpg", icon:"0e15053d-b955-48e5-b6c0-130d5028fd53/484a1b03-8f74-4d25-8af3-6a9a90e05bf2.ico", id:234, name:"Warhammer 40,000: Mechanicus", data:"Warhammer 40,000: Mechanicus", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"0e15053d-b955-48e5-b6c0-130d5028fd53.html"},
+{coverimage:"b95213ed-ae9d-46f6-80be-226a3ecf60a1/7ece34de-6f45-4009-8e79-0d0a0134e284.jpg", icon:"b95213ed-ae9d-46f6-80be-226a3ecf60a1/9fd4c45c-5a43-4f64-a41f-581f5a594495.ico", id:235, name:"We Were Here Too", data:"We Were Here Too", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"b95213ed-ae9d-46f6-80be-226a3ecf60a1.html"},
+{coverimage:"a5fb4bae-1721-4684-a4d4-0ed4b9fce2d9/98184ea7-e23a-4bd7-8d93-1894ed458aaa.jpg", icon:"a5fb4bae-1721-4684-a4d4-0ed4b9fce2d9/5304c9b6-fb94-4eaa-a696-308a6428d6d4.ico", id:236, name:"Whisper of a Rose", data:"Whisper of a Rose", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"a5fb4bae-1721-4684-a4d4-0ed4b9fce2d9.html"},
+{coverimage:"7d32e2d0-ce50-454a-b9eb-c025b9f92cc3/b487fbe1-b4af-4810-87a2-90a2a58dafdf.jpg", icon:"7d32e2d0-ce50-454a-b9eb-c025b9f92cc3/f1e47e51-1a6a-44a1-957f-ad7ce6a45248.ico", id:237, name:"Wizard of Legend", data:"Wizard of Legend", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"7d32e2d0-ce50-454a-b9eb-c025b9f92cc3.html"},
+{coverimage:"8da7d930-8b97-4f22-aa5e-6542f421772d/eff429ee-8c26-4035-a6d7-26a3edcc3dc4.jpg", icon:"8da7d930-8b97-4f22-aa5e-6542f421772d/c9852e35-3218-47aa-9fc6-5f5feaf39514.ico", id:238, name:"World of Goo", data:"World of Goo", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8da7d930-8b97-4f22-aa5e-6542f421772d.html"},
+{coverimage:"8f68936b-c21b-4efb-bd2d-c98de26bf856/a8a3e4ac-9633-4bbd-8a61-486fc52e0628.jpg", icon:"8f68936b-c21b-4efb-bd2d-c98de26bf856/38316ff4-674e-43d7-9957-eff0bb468279.ico", id:239, name:"World to the West", data:"World to the West", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8f68936b-c21b-4efb-bd2d-c98de26bf856.html"},
+{coverimage:"5b166fcd-f6fe-400c-8f68-00edf4ea5d37/2ee794c0-1ce5-4196-923d-5e6b36fe6989.jpg", icon:"5b166fcd-f6fe-400c-8f68-00edf4ea5d37/c65eb936-7dcb-472e-853c-464611dfbd7c.ico", id:240, name:"Wuppo - Definitive Edition", data:"Wuppo - Definitive Edition", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"5b166fcd-f6fe-400c-8f68-00edf4ea5d37.html"},
+{coverimage:"f9109ff3-3200-4681-99cb-36fb21e737b9/21f0ef83-0c8a-495e-810e-a6da39fee8c3.jpg", icon:"f9109ff3-3200-4681-99cb-36fb21e737b9/27607192-e4a9-4ded-916c-6064e64cf7da.ico", id:241, name:"X-COM: Apocalypse", data:"X-COM: Apocalypse", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"f9109ff3-3200-4681-99cb-36fb21e737b9.html"},
+{coverimage:"8e3979bb-7f27-4d8a-8e4a-754cc9180abc/ddf840db-8e9f-46a4-9307-310c34a8a899.jpg", icon:"f9109ff3-3200-4681-99cb-36fb21e737b9/27607192-e4a9-4ded-916c-6064e64cf7da.ico", id:242, name:"X-COM: Enforcer", data:"X-COM: Enforcer", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"8e3979bb-7f27-4d8a-8e4a-754cc9180abc.html"},
+{coverimage:"beb74062-fb8e-4222-86f6-19953c4b726d/de5e72b3-f481-4d02-b19d-08b66b20c88c.jpg", icon:"beb74062-fb8e-4222-86f6-19953c4b726d/1cd9bcfa-898a-43ee-8c22-3afe5bcc41c1.ico", id:243, name:"X-COM: Interceptor", data:"X-COM: Interceptor", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"beb74062-fb8e-4222-86f6-19953c4b726d.html"},
+{coverimage:"fd2c2470-e9e1-41a9-9e58-98406af58d63/a8171f49-08d9-4198-8d9c-dc4590c1c162.jpg", icon:"fd2c2470-e9e1-41a9-9e58-98406af58d63/78af4ec0-dd28-45ef-ae05-ee6b5b1c108e.ico", id:244, name:"X-COM: Terror from the Deep", data:"X-COM: Terror from the Deep", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"fd2c2470-e9e1-41a9-9e58-98406af58d63.html"},
+{coverimage:"81ab92f3-c3da-4d0a-816d-9b7e67194d10/f173d901-e1e3-4cfa-8dc6-910d963ab2af.jpg", icon:"f9109ff3-3200-4681-99cb-36fb21e737b9/27607192-e4a9-4ded-916c-6064e64cf7da.ico", id:245, name:"X-COM: UFO Defense", data:"X-COM: UFO Defense", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"81ab92f3-c3da-4d0a-816d-9b7e67194d10.html"},
+{coverimage:"3ac441b3-8c3e-4c04-b81e-808b8642350e/81744bf4-99e1-4250-9294-ae1fb3c9d6fd.jpg", icon:"3ac441b3-8c3e-4c04-b81e-808b8642350e/60c896bd-413f-4a95-8588-5f5fd0888853.ico", id:246, name:"Yakuza 0", data:"Yakuza 0", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"3ac441b3-8c3e-4c04-b81e-808b8642350e.html"},
+{coverimage:"2094d7ba-1d36-4366-8784-17912f4d41a8/9260a133-a372-41b6-af3c-f642c10eb5f8.jpg", icon:"2094d7ba-1d36-4366-8784-17912f4d41a8/6f43ab0b-7760-48ad-bb2d-e24094d5b7b6.ico", id:247, name:"Yakuza Kiwami", data:"Yakuza Kiwami", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"2094d7ba-1d36-4366-8784-17912f4d41a8.html"},
+{coverimage:"1680ca12-0596-4774-b170-1bec5b35b0c4/77ec2896-2496-462c-9318-6419d0f94d19.jpg", icon:"1680ca12-0596-4774-b170-1bec5b35b0c4/f61c5d5c-f7bf-4548-986d-0d1f70fb9a79.ico", id:248, name:"Yosumin!", data:"Yosumin!", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"1680ca12-0596-4774-b170-1bec5b35b0c4.html"},
+{coverimage:"3270c597-25d5-4c9e-bed8-c55b8817774b/43d32eb8-ba27-4e9d-8922-d7860e709281.jpg", icon:"3270c597-25d5-4c9e-bed8-c55b8817774b/0d3f14c0-5ed6-4fba-a38c-bb9c1c092811.ico", id:249, name:"Zombie Army Trilogy", data:"Zombie Army Trilogy", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"3270c597-25d5-4c9e-bed8-c55b8817774b.html"},
+{coverimage:"9ce342b1-0964-498b-87f3-5634ea197a0a/56350b82-788a-467e-baee-4cb0a434d08a.jpg", icon:"9ce342b1-0964-498b-87f3-5634ea197a0a/1c0f7be7-a013-4b2e-9eba-c6565b8e8feb.ico", id:250, name:"Zombie Night Terror", data:"Zombie Night Terror", lastactivity:"Never", addeddate:"9/2/2024", playtime:"Not Played", source:"Steam", platform:"PC (Windows)", gamefile:"9ce342b1-0964-498b-87f3-5634ea197a0a.html"},
+
+	];
+	
+	var iconMutator  = function(value, data, type, params, column) {
+		if (value == "")
+		{
+			return value
+		} else {
+			return "<img height='32' width='32' src='" + value + "'>";
+		}
+	}
+
+	var table = new Tabulator("#gamestable", {
+		data:tabledata,
+		layout:"fitColumns",
+		responsiveLayout:"hide",
+		height:"450px",
+		columns:[
+		{title:"#", formatter:"rownum", width:57, responsive:0}, //incrementing row number
+		{title:"", field:"icon", mutator:iconMutator, formatter:"html", width:41, responsive:0},
+		{title:"Name", field:"name", widthGrow:2, minWidth:115, formatter:"html", responsive:0},
+		{title:"Name", field:"data", widthGrow:1, minWidth:115, formatter:"html", responsive:0},
+		{title:"Last Activity", field:"lastactivity", widthGrow:1, minWidth:125, maxWidth:180, formatter:"html", responsive:8},
+		{title:"Added", field:"addeddate", width:95, sorter:"date", sorterParams:{format:"DD/MM/YYYY"}, formatter:"html", responsive:9}, 
+		{title:"Playtime", field:"playtime", width:125, formatter:"html", responsive:9},
+		{title:"Source", field:"source", widthGrow:1, minWidth:125, formatter:"html", responsive:7},
+		{title:"Platform", field:"platform", widthGrow:1, minWidth:135, formatter:"html", responsive:0},
+		],
+		rowDblClick:function(e, row){ 
+ 			window.location=row.getData().gamefile;
+		},
+		rowClick:function(e, row){ 
+			var rowdata = row.getData(); 
+			var tmp = document.getElementById("name");
+			tmp.innerHTML = "<a href='" + row.getData().gamefile + "'>" + rowdata.name + "</a>";
+			tmp = document.getElementById("data");
+			tmp.innerHTML = rowdata.data;
+			tmp = document.getElementById("lastactivity");
+			tmp.innerHTML = rowdata.lastactivity;
+			tmp = document.getElementById("addeddate");
+			tmp.innerHTML = rowdata.addeddate;
+			tmp = document.getElementById("playtime");
+			tmp.innerHTML = rowdata.playtime;
+			tmp = document.getElementById("source");
+			tmp.innerHTML = rowdata.source;
+			tmp = document.getElementById("platform");
+			tmp.innerHTML = rowdata.platform;
+			tmp = document.getElementById("coverimage");
+			tmp.src = rowdata.coverimage;
+			tmp = document.getElementById("coverimagelink");
+			tmp.href = row.getData().gamefile;			
+		},
+	});
+
+	function escapeRegExp(string) {
+		return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+	}
+
+	function applyQuickField() {
+		var filterval = quickEl.options[quickEl.selectedIndex].value;
+		if (filterval.value == "")
+		{
+			table.clearFilter();
+		}
+		else
+		{
+			if (filterval == "None")
+			{
+				table.setFilter(dataFilter, {field:"data", compareval:filterval, exactMatch:true, noneOrEmpty:true});
+			}
+			else
+			{
+				table.setFilter(dataFilter, {field:"data", compareval:filterval, exactMatch:true, noneOrEmpty:false});
+			}
+		}
+	}
+
+	function dataFilter(data, filterParams){
+		//data - the data for the row being filtered
+		//filterParams - params object passed to the filter
+		if (filterParams.noneOrEmpty)
+		{
+			return ((he.decode(data[filterParams.field]).toLowerCase() == "") || (he.decode(data[filterParams.field]) == "None"));
+		}
+		else
+		{
+			if (filterParams.exactMatch)
+			{
+				if (filterParams.compareval == "#")
+				{
+					var firstchar = he.decode(data[filterParams.field]).toLowerCase().charAt(0);
+					return ((firstchar >= '0') && (firstchar <= '9')); 
+				}
+				else
+				{
+					//need to use indexof for the date fields as they contains times also
+					return he.decode(data[filterParams.field]).toLowerCase().indexOf(filterParams.compareval.toLowerCase()) == 0;
+				}
+			}
+			else
+			{
+				const regex = new RegExp(escapeRegExp(filterParams.compareval.toLowerCase()), 'g'); //comparevalue is text
+				return regex.test(he.decode(data[filterParams.field]).toLowerCase());
+			}
+		}
+    }
+
+	//Define variables for input elements
+	var fieldEl = document.getElementById("filter-field");
+	var valueEl = document.getElementById("filter-value");
+	var quickEl = document.getElementById("filter-quickfield"); 
+
+	//set filter if passed certain parameter
+	var url = window.location.href;
+	var hashindex = url.lastIndexOf("#quicklink-");
+	var urllen = url.length;
+
+	if (hashindex > -1)
+	{
+		var quicklinktext = "quicklink-";
+		hashindex += quicklinktext.length + 1;
+		
+		if (hashindex < urllen)
+		{
+			var filtervalue = url.substring(hashindex, urllen);
+			if (filtervalue != "")
+			{			
+				quickEl.value = decodeURI(filtervalue);	
+				applyQuickField();
+			}
+		}
+	}
+
+	//Trigger setFilter function with correct parameters
+	function updateFilter(){
+	  var filterVal = fieldEl.options[fieldEl.selectedIndex].value;
+
+	  if(filterVal){
+		table.setFilter(dataFilter, {field:filterVal, compareval:valueEl.value, exactMatch:false, noneOrEmpty:false});
+	  }
+	}
+
+	//Update filters on value change
+	document.getElementById("filter-field").addEventListener("change", updateFilter);
+	document.getElementById("filter-value").addEventListener("keyup", updateFilter);
+
+	//Clear filters on "Clear Filters" button click
+	document.getElementById("filter-clear").addEventListener("click", function(){
+	  fieldEl.value = "";
+	  valueEl.value = "";
+	  quickEl.value = "";
+	  table.clearFilter();
+	});
+
+   </script>
+	<TABLE class="detailstable">
+		<COLGROUP>
+		<COL>
+		<COL>
+		<COL style="width:170px;">
+		<COL>
+		<COL>
+		</COLGROUP>
+		<TR><TD rowspan="5"><a href="" id="coverimagelink"><img height="90" style="max-width: 100%;" id="coverimage" src=""></a></TD><TD colspan="4"></TD></TR>
+		<TR><TD><B>Name</B></TD><TD colspan="3" id="name"></TD></TR>
+		<TR><TD><B>Last Activity</B></TD><TD id="lastactivity"></TD><TD><B>Name</B></TD><TD id="data"></TD></TR>
+		<TR><TD><B>Added</B></TD><TD id="addeddate"></TD><TD><B>Source</B></TD><TD id="source"></TR>
+		<TR><TD><B>Playtime</B></TD><TD id="playtime"></TD><TD><B>Platform</B></TD><TD id="platform"></TD></TR>
+	</TABLE>
+	</body>
+</html>
