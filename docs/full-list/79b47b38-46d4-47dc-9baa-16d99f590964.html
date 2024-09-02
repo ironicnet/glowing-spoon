@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Starmancer</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('79b47b38-46d4-47dc-9baa-16d99f590964/64d839ce-9a64-4821-8a4f-24df38ec003a.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src=""/> Starmancer</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="79b47b38-46d4-47dc-9baa-16d99f590964/19331109-a39a-4eb4-97ba-0de286c02e74.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>22m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-9/15/2019">9/15/2019</a> 6:40:52</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 14:50:25</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 19:06:21</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-8/5/2021">8/5/2021</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="#quicklink-Indie">Indie</a><br/><a href="#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/><a href="#quicklink-Simulator">Simulator</a><br/><a href="#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="#quicklink-Ominux Games">Ominux Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="#quicklink-Chucklefish Games">Chucklefish Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.playstarmancer.com/" target="_blank">Official</a><br/><a href="https://twitter.com/starmancergame" target="_blank">Twitter</a><br/><a href="https://www.reddit.com/r/playstarmancer" target="_blank">Reddit</a><br/><a href="https://store.steampowered.com/app/1062000" target="_blank">Steam</a><br/><a href="https://www.facebook.com/StarmancerGame?ref=aymt_homepage_panel" target="_blank">Facebook</a><br/><a href="https://discordapp.com/invite/Pc48yAH" target="_blank">Discord</a><br/><a href="https://www.gog.com/game/starmancer" target="_blank">GOG</a><br/><a href="https://www.twitch.tv/directory/game/Starmancer" target="_blank">Twitch</a><br/><a href="https://gamicus.fandom.com/wiki/Starmancer" target="_blank">Wikia</a><br/><a href="https://en.wikipedia.org/wiki/Starmancer" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<img src="https://cdn.akamai.steamstatic.com/steam/apps/1062000/extras/Description_Header_Starmancer.gif?t=1683130707" /><br>After a catastrophe on Earth, humanity launches the Starmancer Initiative in a desperate attempt to seek refuge among the stars. Millions of refugees uploaded their consciousness into your memory banks--entrusting their minds and the future of the human race to an Artificial Intelligence, a Starmancer. To you.<br><br>Stranded in a strange star system, your task as a Starmancer is to construct and manage a space station capable of sustaining human life.<br><br>Starmancer offers gameplay with consequences, a living sandbox environment, space exploration, and managing the lives of colonists. <br><br>Create a utopian society where everyone is well fed, happy, and safe. Take colonists on adventures through the galaxy, using them for the greater good of expanding the station and sustaining human life. Or ignore the rules and figure out how many times a colonist can eat space rock before their liver is destroyed. Go crazy. The choice is yours!<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1062000/extras/Description_Header_Build.gif?t=1683130707" /><br><ul class="bb_ul"><li><strong>Sustain Life</strong> - Colonists have needs, like hunger and sleep. Build farms and grow crops for food. Build bathrooms to prevent smelly accidents. Construct med bays and assign doctors to craft medkits, experiment with diseases, and extract heads for recycling purposes.<br></li><li><strong>Express Yourself</strong> - Customize your station with unique walling, floors, furniture, and tons of weird and wonderful decorations and objects. Place cheerful paintings to remind the colonists how friendly and relatable you are, and motivational posters to let them know how much you value their productivity. Design fancy kitchens, luxurious bedrooms, and relaxing gardens.  <br></li><li><strong>Power, Water, and Atmosphere</strong> - Provide power by connecting machines with wires. Prepare against blackouts by creating separate or redundant grids for your vital machines. Use pipes and water recyclers to convert dirty water into clean water for your farms. Create isolated atmospheres using vents and air ducts.</li></ul><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1062000/extras/Description_Header_Colonists.gif?t=1683130707" /><br><ul class="bb_ul"><li><strong>Grow Colonists</strong> - Colonists are grown in your core’s incubator, with personas assigned from the minds of Earth refugees stored in memory banks on your station. If tragedy strikes, don’t worry, you can always regrow your favorite colonists! <br></li><li><strong>Jobs</strong> - Assign roles like farmer, doctor, miner, and resource hauler. Watch as your rookie explorer acquires experience and becomes a deadly warrior--demolishing any zombie, slime, or rogue bot in their path<br></li><li><strong>Unique Colonists</strong> - Randomized hair color and style, eye color, and skin color adds thousands of colonist variations. These variations go beyond aesthetics, too. Some colonists are aggressive and fight often, while others keep the lights on when they go to sleep. Every game is different--your station and colonists will be unique to you. <br><br></li><li><strong>Morale</strong> - Colonists remember the good (and bad) things that happen to them. Traumatic experiences, like seeing a dead body, drastically reduces their morale. Feed your colonists tasty food and decorate your station to keep morale high. Unhappy colonists will stop working. Be careful, though, when morale gets too low, colonists will start fighting each other. If morale remains low, colonists adopt strange behaviors: talking to walls, lighting fires, and spray painting graffiti.<br></li><li><strong>Skills</strong> - Colonists have skills like strength, health, researching, and speed. As your colonists perform these tasks, they get better and better. Colonists with high strength skill can defeat monsters in a single punch (they can also drag unconscious colonists)! </li></ul><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1062000/extras/Description_Header_The_Wilderness.gif?t=1683130707" /><h2 class="bb_tag">Beyond your station’s borders lies the vast darkness of space—filled with wildlife, abandoned stations, and rare loot!</h2><ul class="bb_ul"><li><strong>Draft</strong> - Draft and send your bravest colonists out into the wilderness to defeat hostile wildlife—creating a safe environment for your gentler colonists to gather resources and discover precious loot! <br></li><li><strong>Hostile Wildlife</strong> - Slimes, undead zombies, and malfunctioning robots are just a few of the enemies inhabiting the nearby asteroids and derelict stations. Feed food to your colonists to heal them during combat.<br></li><li><strong>Relics</strong> - Special items with unique properties. An ordinary pen that erases all memories. An encyclopedia that increases all experience earned. C4 for blowing up monsters and clearing paths in stations.<br></li><li><strong>Derelict Stations</strong> - A Medilab overrun with the undead. A waste station taken over by slimes. A casino ship guarded by the robot mafia. Explore them all. Move any objects you find into your base and keep them forever. Your crew can even live in the abandoned stations!<br></li><li><strong>Procedurally Generated</strong> - The asteroids and stations beyond your borders are generated every time you warp to a new star system, but the resources, wildlife, and stations are consistent in a star biome. This helps you find basic resources, but you’ll never know exactly what to expect when you arrive in a new system. Maybe a nest of alien critters is blocking access to a patch of crystals. Or a purple slime is patrolling the only exit out of a Waste Station.<br> <br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1062000/extras/spacer_10px.gif?t=1683130707" /><h2 class="bb_tag"><strong>Key Features</strong></h2><ul class="bb_ul"><li> Build a thriving space station, with tons of customization.<br></li><li> Manage the lives of colonists aboard your station.<br></li><li> Warp to randomized star systems to explore, loot, and defeat enemies<br></li><li> Tinker with the sandbox using cheats: spawn monsters, build instantly, give yourself all the money, and more.<br></li><li> Modding support<br></li><li> Active Development — Check out our weekly developer stream!</li></ul></li></ul>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

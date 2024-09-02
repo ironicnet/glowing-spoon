@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Rogue Legacy 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('c5118802-18c5-4a83-a90b-693eeefa29df/7549d38d-4db8-4185-bb6d-fb5d7b92fee4.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="c5118802-18c5-4a83-a90b-693eeefa29df/a6e87f3a-3f36-4f4c-9a70-8441015e9cbc.png"/> Rogue Legacy 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="c5118802-18c5-4a83-a90b-693eeefa29df/1847e42e-d1da-4e3f-8fec-7a29b1828bcd.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 14:50:25</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 15:04:21</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-4/18/2020">4/18/2020</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="#quicklink-79">79</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Indie">Indie</a><br/><a href="#quicklink-Platform">Platform</a><br/><a href="#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="#quicklink-Cellar Door Games">Cellar Door Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="#quicklink-Cellar Door Games">Cellar Door Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://twitter.com/CellarDoorGames" target="_blank">Twitter</a><br/><a href="https://store.steampowered.com/app/1253920" target="_blank">Steam</a><br/><a href="https://www.epicgames.com/store/en-US/product/rogue-legacy-2/home" target="_blank">Epic</a><br/><a href="https://www.roguelegacy2.com/" target="_blank">Official</a><br/><a href="https://youtube.com/CellarDoorGames" target="_blank">YouTube</a><br/><a href="http://discord.gg/cellardoorgames" target="_blank">Discord</a><br/><a href="https://www.facebook.com/CellarDoorGames" target="_blank">Facebook</a><br/><a href="https://en.wikipedia.org/wiki/Rogue_Legacy_2" target="_blank">Wikipedia</a><br/><a href="https://www.twitch.tv/directory/game/Rogue%20Legacy%202" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/extras/animated_gameplay_banner_lossless_with_border_resized.gif?t=1688362324" /><br><br>Rogue Legacy is back! But now it's got a 2 on the end of it!<br><br>Rogue Legacy 2 is a genealogical rogue-LITE. That means it has all the trappings of a typical rogue-like (randomized runs, changing characters, and more), but with persistent upgrades, and persistent dead heirs.  In this game, your legacy defines you.  Spend your parents’ inheritance and grow the family manor to give your children a better fighting chance.  Each child is unique, with their own traits and abilities.  Your daughter could be a Ranger.  She could also be vegan.  It’s a new experience every time.  Rogue Legacy 2 also lets you play how you want to.  Go hard and fast, and dive deeper into the depths of a randomly-generated world.  Or take it slow and steady and build your character up until you’re ready for greater challenges.<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/extras/rl2_header.png?t=1688362324" /><h2 class="bb_tag">Every Adventure is Unique</h2>New monsters, new traps, and new layouts await you every time you enter the Kingdom. This is a world where improvisation, and not memorization is the key to success.<h2 class="bb_tag">Wildly New Classes</h2>No two classes play the same. Hide atop Ivy Canopies as the Ranger, and rain poisoned arrows down onto your foes. Take to the skies as a Dragon Lancer and fly across the skies striking foes at massive speeds. Or sing and dance through your enemies, as the joyous bard, leaving only a trail of bodies behind you. Rogue Legacy 2 supports 15 new classes, with 15 distinct styles of play.  <br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/extras/4classes.png?t=1688362324" /><h2 class="bb_tag">Brand New Style</h2>We’re taking a whole new artistic approach to Rogue Legacy 2. The sequel features 2.5D stylings, with 3D characters against hand-drawn backdrops.  The art uses heavy shading and all animations are done using stepping techniques to keep the familiar RL look and feel.<h2 class="bb_tag">Revamped Biome Generation</h2>We went all-out with biome generation to make each area in RL2 feel completely new.  Each biome adopts different “build strategies” to create completely unique yet-still-randomly-generated regions.<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/extras/4biomes.png?t=1688362324" /><h2 class="bb_tag">True Metroidvania</h2>To really push the metroidvania flair, RL2 introduces heirlooms: special items that permanently give your heroes new abilities that fully reveal the world’s secrets.  These are not basic lock-in-key abilities, but powers that fundamentally change how you play.  And heirlooms are not simply handed to you.  You must prove your worth, provided you can find them.<h2 class="bb_tag">Traits 2.0</h2>Though fun the first time, the traits in RL1 often wore their welcome later in the game.  We’ve now added gold modifiers to entice players to take on new challenges.  The more debilitating the trait is (in-game), the bigger the reward.  This makes choosing your heirs a meaningful decision every time.<h2 class="bb_tag">Relics and Resolve</h2>One of the most exciting new features to Rogue Legacy 2 is the ability to pick up Relics, which are unique items that change how your run is played.  Gain stat modifiers, complete special challenges, and even gain brand new abilities as you traverse the kingdom.  But be careful, the more Relics you obtain the more your resolve is shaken, and all Relics are lost if your hero perishes. <br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/extras/relic.png?t=1688362324" /><h2 class="bb_tag">Improved Accessibility</h2>We’ve taken accessibility to the next level with the introduction of House Rules.  Toggle contact damage, tweak global damage and health, and even give yourself flight for difficult platform sections.  You have complete control over how you want to play the game.  We’ve also introduced new mechanics such as Off-shore Banking to give struggling players more ways to succeed.<h2 class="bb_tag">A Rich Narrative</h2>Not only is the lore to the world of Rogue Legacy greatly expanded in the sequel, but it runs deep. New lore awaits you all the multiple NG’s in. Beating the game once is only the beginning.  Learn about the inevitable collapse of a once thriving kingdom, and discover the dark secrets of the ones responsible.  And connect and build relationships with the characters you meet along the way.<h2 class="bb_tag">New Game+ for Days</h2>Your journey has only begun after beating the final boss in RL2.  There is a ton more to explore and discover on multiple playthroughs.  You must choose how the game gets harder, from unique biome hazards, to special boss fights.  The experience keeps changing for near infinite replayability.<h2 class="bb_tag">More of Everything</h2>Of course we’re also adding more of everything people loved from the original Rogue Legacy.  More traits, more spells, more classes, more biomes, more enemies, more equipment, more rooms, more story.  <strong>More secrets</strong>... Just more everything.<h2 class="bb_tag">Clownanthropy.</h2><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/extras/clowns.png?t=1688362324" /><br>Holy smokes! Punching clowns!<br><br><strong>AND THERE'S A WHOLE LOT MORE.</strong>  This only scratches the surface of what Rogue Legacy 2 has to offer.  Scar Challenges, Fairy Rooms, the Curio Shoppe, the list goes on, but reading is for nerds.  Go out and discover the world of Rogue Legacy 2 for yourself!<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/extras/blacksmith_small.gif?t=1688362324" /><br><br><a href="https://store.steampowered.com/app/1253920/Rogue_Legacy_2/" target="_blank" rel=""  id="dynamiclink_1" >https://store.steampowered.com/app/1253920/Rogue_Legacy_2/</a>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

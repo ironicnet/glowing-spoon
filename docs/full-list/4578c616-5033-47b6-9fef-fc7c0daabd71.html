@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Conqueror&#39;s Blade</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('4578c616-5033-47b6-9fef-fc7c0daabd71/767de349-9533-460a-84e6-18f155f97a06.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="4578c616-5033-47b6-9fef-fc7c0daabd71/333c7e98-7be3-47f1-9f4a-1ef3ac221c19.png"/> Conqueror&#39;s Blade</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="4578c616-5033-47b6-9fef-fc7c0daabd71/ecd6a6cd-7421-44ac-b0d5-04695fdc26af.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>1m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-3/21/2024">3/21/2024</a> 9:42:10</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-5/19/2024">5/19/2024</a> 18:53:06</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-5/19/2024">5/19/2024</a> 18:53:26</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-5/30/2019">5/30/2019</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="#quicklink-63">63</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/><a href="#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="#quicklink-Booming Games">Booming Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="#quicklink-MY.GAMES">MY.GAMES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Co-Operative">Co-Operative</a><br/><a href="#quicklink-Massively Multiplayer Online (MMO)">Massively Multiplayer Online (MMO)</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.conquerorsblade.com/homepage" target="_blank">Official</a><br/><a href="https://www.facebook.com/ConquerorsBlade" target="_blank">Facebook</a><br/><a href="https://twitter.com/ConquerorsBlade" target="_blank">Twitter</a><br/><a href="https://www.youtube.com/channel/UCzgcLuM-kecLux1A3csn_Jg/featured" target="_blank">YouTube</a><br/><a href="https://store.steampowered.com/app/905370" target="_blank">Steam</a><br/><a href="https://www.reddit.com/r/ConquerorsBlade" target="_blank">Reddit</a><br/><a href="https://en.wikipedia.org/wiki/Conqueror's_Blade" target="_blank">Wikipedia</a><br/><a href="https://www.instagram.com/conquerorsbladeen" target="_blank">Instagram</a><br/><a href="https://discord.gg/invite/ConquerorsBlade" target="_blank">Discord</a><br/><a href="https://www.twitch.tv/directory/game/Conqueror's%20Blade" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/ShillouetteHeader.jpg?t=1714571645" /><br>Forge your legend in battle in Conqueror's Blade, a free-to-play tactical action MMO brought to you by MY.GAMES and Booming Tech. Master the art of siege tactics, command medieval units, and conquer castles in massive online battles featuring units, heroes, armour, and maps inspired by real-world history!<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/feature_EN_1.png?t=1714571645" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/gif_3_units.gif?t=1714571645" /><br>Coordinate with your team to attack or defend castles and fortresses in Siege Battles. Deploy siege weapons like trebuchets and mortars to breach defences, command your units in real-time, and fight in teams of up to 15 players for glory, spoils, and the thrill of the fight! You can also put your strategic expertise to the test by capturing zones in classic Field Battles and delving into Limited-Time PvP or PvE Event Modes on special occasions.<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/feature_EN_2.png?t=1714571645" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/gif_2_heroes.gif?t=1714571645" /><br>Customise your character and arm them with a range of powerful weapon classes. Each class boasts distinct playstyles, attacks, and special abilities, and offers unique tactical advantages to help you turn the tide of battle in your favour. Wield the classic Longsword and Shield, the brutish Maul, the long-reaching Spear, the martial arts-inspired Pike, the explosive power of the Musket, Bows and arrows, and lots more weapons that can be switched out at any time.<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/feature_EN_3.png?t=1714571645" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/static_units.png?t=1714571645" /><br>Command powerful units inspired by warriors from medieval history. Dozens of melee, ranged, and cavalry soldiers can be unlocked, including historically-inspired units like the Winged Hussars, Shieldmaidens, Namkhan Archers, and Siphonarioi. You can also use various unique unit mechanics to gain an advantage, such as healing, musical buffs, and explosives. New units join the fray every Season, so be sure to adapt your unit loadout and strategies regularly!<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/feature_EN_4.png?t=1714571645" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/static_tw.png?t=1714571645" /><br>Up the stakes by pledging your blade in Territory Wars, massive PvP events fought between hundreds of players in Houses and Factions on a server-wide scale. Join a House with your friends and compete to claim land and build your prestige. Control territories to craft war supplies at discounted rates and set tax rates to earn weekly revenue for your House. At the end of every Season, prepare for climactic Territory Wars showdowns on huge battlegrounds like Reginopolis and Turul Város!<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/feature_EN_5.png?t=1714571645" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/905370/extras/gif_5_seasons.gif?t=1714571645" /><br>Seasons are limited-time events where you can complete challenges to earn exclusive content from the Free Pass or Battle Pass, including exclusive cosmetics and useful resources. Every Season is themed, steeped in lore, and features original Seasonal Campaigns and Challenges—play often to conquer new battlefields, unlock new units, and discover armour and weaponry inspired by historical eras such as the Viking Age, Medieval France, Ancient China, and the Byzantine Empire.
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

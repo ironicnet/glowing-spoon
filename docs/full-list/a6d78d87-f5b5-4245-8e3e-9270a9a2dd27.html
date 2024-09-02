@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Forts</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('a6d78d87-f5b5-4245-8e3e-9270a9a2dd27/9d792b3c-c88a-4656-b57f-216259e2d3dd.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="a6d78d87-f5b5-4245-8e3e-9270a9a2dd27/30aaec12-dc56-49ee-8208-f2c195f76854.png"/> Forts</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="a6d78d87-f5b5-4245-8e3e-9270a9a2dd27/9115af19-44ac-4bfe-8c9d-fadccd1b7392.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>1h 15m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-9/12/2021">9/12/2021</a> 4:08:58</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 14:50:25</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 15:29:07</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-4/19/2017">4/19/2017</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="#quicklink-51">51</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="#quicklink-Real Time Strategy (RTS)">Real Time Strategy (RTS)</a><br/><a href="#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="#quicklink-EarthWork Games">EarthWork Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="#quicklink-EarthWork Games">EarthWork Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Co-Operative">Co-Operative</a><br/><a href="#quicklink-Multiplayer">Multiplayer</a><br/><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/410900" target="_blank">Steam</a><br/><a href="http://www.earthworkgames.com" target="_blank">Official</a><br/><a href="https://www.youtube.com/channel/UCvnUApd-nJohGQNoHOc89qA" target="_blank">YouTube</a><br/><a href="https://www.facebook.com/earthworkgames" target="_blank">Facebook</a><br/><a href="https://twitter.com/EarthWorkGames" target="_blank">Twitter</a><br/><a href="https://discord.com/invite/TP4CpnF" target="_blank">Discord</a><br/><a href="https://www.reddit.com/r/FortsGame/" target="_blank">Reddit</a><br/><a href="https://www.twitch.tv/directory/game/Forts" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					Unleash your creativity and strategic prowess in Forts, the exhilarating physics-based RTS! Design, construct, and customize imposing fortresses, bristling with devastating firepower, and blast your opponent’s buildings to rubble!<br><br>Experience the thrill of real-time construction and resource management as you forge ahead in the unforgiving race to develop your tech tree, and unlock a deadly arsenal of advanced weaponry to exploit your enemy's vulnerabilities. Savor the sweet taste of victory as their once-mighty forts collapse into smoldering heaps of ruin!<br><br>Are you ready to embark on an adrenaline-fueled journey of construction, destruction, and ultimate domination? Join the ranks of Forts now, and let the battle commence!<br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Build_your_fort_your_way2_EN.png?t=1691101014" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/BUILD-THE-ULTIMATE-FORT-4.gif?t=1691101014" /><br>Construct custom bases in real-time, manage resources, and develop your tech tree to dominate the battlefield in the thrilling single-player campaign, or join up to seven other competitors in multiplayer matches of mayhem and blow your enemies’ forts to bits!.<br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Separator.png?t=1691101014" /><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Fire_at_will2_EN.png?t=1691101014" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/FIRE-AT-WILL3.gif?t=1691101014" /><br>Arm your fort with 16 advanced weapons to counter any threat and target your opponent's weak points.  Everything from machine guns to missiles, snipers &amp; even plasma weapons: whatever the battle calls for, there’s a weapon to unlock that can meet the challenge!<br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Separator.png?t=1691101014" /><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Command_in_style2_EN.png?t=1691101014" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/COMMAND-IN-STYLE-3.gif?t=1691101014" /><br>Are you drawn to the fierce firepower of the 'Warthog', or the unyielding resilience of 'Armourdillo’? Maybe you prefer the cunning prowess of 'Shockenaugh,' or the building mastery of 'Architect’? Whatever your style, with 12 characters to choose from, Forts has a commander to suit any strategy!<br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Separator.png?t=1691101014" /><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Conquer_the_Campaign_EN.png?t=1691101014" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/MASTER-SOLO-MODE2.gif?t=1691101014" /><br>Eager to sharpen your skills before battling other players, or craving a break from intensity of the multiplayer scene? Immerse yourself in our action-packed 28-mission single-player campaign mode, where adrenaline-pumping combat meets mind-bending challenges as you battle to save the world from the evil Black Penguin Oil Company.<br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Separator.png?t=1691101014" /><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Blast_yourself_to_the_top2_EN.png?t=1691101014" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/BLAST-YOURSELF-TO-THE-TOP.gif?t=1691101014" /><br>Unleash your competitive edge in thrilling ranked matches! Boost your leaderboard rank as you dominate opponents during intense two-month seasons. Climb to the top of the electrifying 1v1 arena and seize the coveted medals reserved for gaming legends. Your moment of glory awaits!<br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Separator.png?t=1691101014" /><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Expand_your_fort_horizons2_EN.png?t=1691101014" /><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/EXPAND-YOUR-FORT-HORIZONS.gif?t=1691101014" /><br>As you masterfully construct your fortresses, we're tirelessly innovating new features just for you! From its release, Forts has thrived with ample support, including:<br><br><ul class="bb_ul"><li>High Seas DLC - Construct and combat cruisers, battleships and aircraft carriers on the open seas as you hunt down the pirate scourge across the naval campaign. Master the expanded physics dynamics with the new water and buoyancy tech, and host multiplayer games to grant all players access to all High Seas features and weapons!<br></li><li>Moonshot DLC - Fight against the villainous BPO across the Pacific Rim campaign to reclaim the coveted Moontech! Build and battle in four fresh combat arenas, gain access to a devastating new arsenal, and uncover unique features, such as the physics-bending portal! Host games and allow all players in the lobby to get hands on with Moonshot tech and arsenal!<br></li><li>Multiplayer Training - Specially crafted missions designed to seamlessly onboard new players into the thrilling realm of online play!<br></li><li>Forts lives! - Forts is constantly evolving with bi-monthly updates to coincide with our ranked seasons, bringing fixes, balancing adjustments and explosive new features such as….<br></li><li>Free DLC - Tons of Guns (bristling with weapons), Repair Station (fort maintenance robo-buddy), additional commander characters (each with game-changing powers &amp; abilities) and more….<br></li><li>Modding - Forts, meticulously constructed to foster modding, seamlessly integrates with the Steam Workshop to nurture creativity with the inbuilt map editor, player-designed weapons, tech, and campaigns, while continually being enriched with fresh features.<br></li><li>Ranked Multiplayer Leaderboards - Think your fort is impregnable? Prove it by challenging other players in Forts’ 1v1 bi-monthly seasons. Climb to the top in pitched combat and get rewarded with unique collectable medals.<br></li><li>Seasonal Content - Enjoy your favorite festive seasons with special Forts content, such as Halloween and Holiday themes, and more..<br></li><li>Vibrant Community - Jump into the lively Forts Discord server, a thriving hub of enthusiastic members eager to chat and share! Learn tactical &amp; strategy tips, enrole in high-skilled official tournaments, and have your modding questions expertly answered within this energetic community.</li></ul><img src="https://cdn.akamai.steamstatic.com/steam/apps/410900/extras/Separator.png?t=1691101014" />
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

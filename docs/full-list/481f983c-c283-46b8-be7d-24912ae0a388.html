@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Qubicle Voxel Editor</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src=""/> Qubicle Voxel Editor</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>2h 20m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-11/25/2021">11/25/2021</a> 2:53:43</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 14:50:25</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 19:14:36</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-"></a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					Qubicle is a professional voxel editor optimized for the easy creation of 3D models with a unique, blocky charm. It was used on big hits like Crossy Road and Shooty Skies, and will enable you to quickly design your own 3D models at an affordable price.<br><br>Voxels are 3D pixels which allow for a unique aesthetic and workflow:<br><br><ul class="bb_ul"><li>Draw and paint intuitively in three dimensions<br></li><li>Build, color and clean meshes in a single step<br></li><li>Unleash your imagination in a charming retro style</li></ul><h2 class="bb_tag"><strong>Features</strong></h2><br>Qubicle is designed for professionals, with all the tools and options artists expect and need.<br><br><ul class="bb_ul"><li>Feel at home with familiar tools of standard 2D and 3D software<br></li><li>Start creating in an hour thanks to an intuitive interface and workflow<br></li><li>Create very large models and scenes<br></li><li>Edit your models easily in component parts<br></li><li>Get efficient mesh optimization perfect for mobile games<br></li><li>Edit voxels in 3D or on a 2D canvas<br></li><li>Get 21 different tools for drawing, selecting and transforming voxels<br></li><li>Use tool-mirroring symmetry<br></li><li>Transform and modify selected voxels or whole objects with over 40 different actions<br></li><li>Create up to 16 million objects per scene with a maximum size of 1024x512x1024 voxels per object<br></li><li>Import and export all supported voxel formats (QB, QEF, QBT, QMO, QBCL, VOX, Minecraft Schematic)<br></li><li>Export unoptimized meshes as OBJ, FBX and Collada (Mesh optimization available with Mesh DLC)<br></li><li>Export slices as PNG <br></li><li>Customize the user interface, including your own hotkeys<br></li><li>3D-print directly at home or upload to i.materialise<br></li><li>Upload to Sketchfab to share your models</li></ul><h2 class="bb_tag"><strong>Purchasing Options</strong></h2><br>Thousands of professionals rely on Qubicle in their creative process. To make the software accessible to hobbyists and modders, Steam users have the opportunity to purchase the full program as available on our website, or start their voxel journey with the basic application and progressively upgrade to the full version with DLC add-ons.<br><br>Of course you will get all updates and fixes for Qubicle Voxel Editor 3.0, as we continue to improve and expand the program. <br><br><strong>Qubicle Basic Edition</strong><br>Your departure point into the world of voxel modeling. The basic application contains all the tools required to create, export and share your voxel models and can be expanded with the following DLC modules.<br><br><strong>Qubicle Utility Module</strong><br>Enhance your modeling workflow with landscape generation, height map import and object hierarchy.<br><br><strong>Qubicle Mesh Module</strong> <br>Export optimized low poly meshes that run efficiently with all common game engines. Non-optimized mesh export is included in the basic application.<br><br><strong>Qubicle Voxelizer Module</strong>  <br>Unlock the built-in Voxelizer to effortlessly convert regular meshes to voxels. <br><br><strong>Qubicle Indie Edition</strong><br>The full-featured software as used in the game industry. The indie edition contains all of the available Module features.<br><br><strong>Qubicle Professional License</strong>  <br>Is required if you want to use Qubicle commercially and your annual revenue is above 80K USD<h2 class="bb_tag"><strong>License</strong></h2>We authorize the use of the Qubicle Voxel Editor to any indie developer or company generating less than $80K USD per year in revenue (based on prior fiscal year). If you are above this limit the Qubicle Professional Licence is required.<h2 class="bb_tag"><strong>What You Get</strong></h2><br> <br><strong>Qubicle Demo</strong><br><ul class="bb_ul"><li> Test all features of the Basic Edition for an unlimited time<br></li><li> Save as .qbcl, Qubicle's default file format. All models made with the demo can be opened with the Basic Edition<br></li><li> Export functionality can be tested with built-in test models. Export of custom models is disabled.</li></ul><br><strong>Qubicle Basic Edition</strong><br><ul class="bb_ul"><li> Contains all Demo features<br></li><li> Unlocks export to all supported voxel formats: .qb, qbt, qef, vox, minecraft schematic<br></li><li> Unlocks export as FBX, Collada, OBJ (optimization for low poly meshes remains locked)<br></li><li> Unlocks &quot;Export Slices&quot;<br></li><li> Unlocks &quot;Share On Sketchfab&quot; and &quot;3D-Print with i.materialise&quot;</li></ul><br><strong>Qubicle Utility DLC</strong><br><ul class="bb_ul"><li> Add-on for the Basic Edition<br></li><li> Unlocks &quot;Import Heigth Map&quot; and &quot;Create Terrain&quot; for custom and random lanscape generation<br></li><li> Unlocks object type Compounds and all modifiers found in &quot;Modify &gt; Compounds&quot;. Enables object hierarchies</li></ul><br><strong>Qubicle Mesh DLC</strong><br><ul class="bb_ul"><li> Add-on for the Basic Edition<br></li><li> Unlocks low poly mesh optimization for FBX, Collada and OBJ<br></li><li> Unlocks export as STL<br></li><li> Unlocks further mesh export options: filename prefixes, texture output folder, face discarding<br></li><li> Unlocks &quot;Export Cubes&quot;</li></ul><br><strong>Qubicle Voxelizer DLC</strong><br><ul class="bb_ul"><li> Add-on for the Basic Edition<br></li><li> Unlocks the Voxelizer, a built-in mesh to voxel converter, and the corresponding menu &quot;Voxelizer&quot;</li></ul><br><strong>Qubicle Indie Edition</strong><br><ul class="bb_ul"><li> Contains all available features<br></li><li> Is the same as Basic + Utility + Mesh + Voxelizer</li></ul><br><strong>Qubicle Professional License DLC</strong><br><ul class="bb_ul"><li> Add-on for the Basic Edition and the Indie Edition<br></li><li> Does not unlock new features <br></li><li> Allows you to use Qubicle commercially if you are above the 80K USD annual revenue limit</li></ul>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

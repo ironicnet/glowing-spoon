@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Millennium - A New Hope</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('c2d1b6a4-16eb-4a8d-a5f9-cdae73d69f0b/3b99d9ea-5bcd-455c-9c5d-2c1898a742ef.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src=""/> Millennium - A New Hope</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="c2d1b6a4-16eb-4a8d-a5f9-cdae73d69f0b/a3ef790c-affe-4bb9-8b41-1a1295c55fc6.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 14:50:25</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 19:25:00</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-9/21/2009">9/21/2009</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="#quicklink-50">50</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Indie">Indie</a><br/><a href="#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="#quicklink-Aldorlea Games">Aldorlea Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="#quicklink-Aldorlea Games">Aldorlea Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="http://www.aldorlea.org/millennium.php" target="_blank">Wikia</a><br/><a href="https://store.steampowered.com/app/280140" target="_blank">Steam</a><br/><a href="http://www.aldorlea.org/millennium.php" target="_blank">Official</a><br/><a href="https://www.twitch.tv/directory/game/Millennium:%20A%20New%20Hope" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<a href="https://steamcommunity.com/linkfilter/?url=https://discord.gg/pSVd3fAxgM" target="_blank" rel=" noopener"  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/280140/extras/discordALDO616B.png?t=1634804885" /></a><h2 class="bb_tag">Backstory</h2><br>Marine is young - too young to endeavor great things.<br>But Marine is a fighter and she refuses to accept fate.<br>Because her fate is to be a peasant and probably die young - a disease, or a predator, whatever, you always die of something in the murky lands of Myst.<br><br>So when her father is critically injured, Marine decides to fight back and take over the crusade he can no longer pursue.<br>Which crusade? To challenge the feared Lords of Mystrock, the rich megalopolis of Myst, and defeat them in a traditional showdown that decides the rulers of the world.<br>Everybody keeps telling Marine it's impossible and she'll end up swatted like a fly. <br>But what do YOU think?<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/280140/extras/millennium-promo-256.png?t=1634804885" /><h2 class="bb_tag"> </h2><h2 class="bb_tag">Details</h2><br>Millennium is the first episode of <a href="https://steamcommunity.com/linkfilter/?url=http://www.aldorlea.org" target="_blank" rel=" noopener"  >Aldorlea</a>'s flagship series (the makers behind The Book of Legends, Moonchild, Dreamscape, 3 Stars of Destiny, Asguaard, Undefeated etc.).<br>Featuring an immersive story, this game is a fantastic introduction to a series <a href="http://steamcommunity.com/sharedfiles/filedetails/?id=92968395" target="_blank" rel=""  >greenlighted by the Steam community</a> that spans over 5 episodes and features more than 20 characters in total.<h2 class="bb_tag"> </h2><h2 class="bb_tag">Key Features</h2><br><ul class="bb_ul"><li>50+ achievements to unlock - can you get them all?<br></li><li>4 levels of difficulty - choose your difficulty and enjoy replaying the game at its most challenging<br></li><li>Choose visible or invisible monsters - cater to the encounter style you prefer<br></li><li>Optional guiding arrows - enjoy the game without the worry of having to look up a walkthrough or guide<br></li><li>Dozens of secret rooms - for those who like to explore and discover every secret<br></li><li>40 quests - easy request from a villager or very tricky riddle to solve, help people as you progress in your adventure<br></li><li>Battle superb monsters including 8 Animal Kings - they are the most dangerous and feared creatures out there, so beware<br></li><li>Get help from Jeanne - your magically-gifted fairy friend that you can summon when you really need that little something extra<br></li><li>Gorgeous retro graphics and musics - Millennium features high production values in its genre, all for your enjoyment<br></li><li><a href="https://steamcommunity.com/linkfilter/?url=http://www.rpgfan.com/features/go2009/indie.html" target="_blank" rel=" noopener"  >RPG Fan's Indie RPG of the Year 2009</a></li></ul><h2 class="bb_tag"> </h2><h2 class="bb_tag">Best-Selling Games by Aldorlea</h2><br><a href="http://store.steampowered.com/app/277470" target="_blank" rel=""  id="dynamiclink_3" >http://store.steampowered.com/app/277470</a><br><a href="http://store.steampowered.com/app/332380" target="_blank" rel=""  id="dynamiclink_4" >http://store.steampowered.com/app/332380</a><br><a href="http://store.steampowered.com/app/332390" target="_blank" rel=""  id="dynamiclink_5" >http://store.steampowered.com/app/332390</a><h2 class="bb_tag"> </h2><h2 class="bb_tag">Aldorlea Useful Links</h2><br><ul class="bb_ul"><li><a href="https://steamcommunity.com/linkfilter/?url=http://www.aldorlea.org/" target="_blank" rel=" noopener"  >Official Website</a> (contains 100+ games including all 15+ Aldorlea Games released to date)<br></li><li><a href="https://steamcommunity.com/linkfilter/?url=http://www.aldorlea.org/officialsite/phpBB3/" target="_blank" rel=" noopener"  >Aldorlea Community</a> (join it to receive help and info about the games)<br></li><li><a href="https://steamcommunity.com/linkfilter/?url=https://www.facebook.com/AldorleaGames" target="_blank" rel=" noopener"  >Aldorlea Facebook Page</a> (become a member to get up-to-date news about us)<br></li><li><a href="https://steamcommunity.com/linkfilter/?url=http://www.aldorlea.org/officialsite/phpBB3/viewforum.php?f=60" target="_blank" rel=" noopener"  >Millennium Help Forum</a> (tons of info to be found there for the aspiring adventurer)</li></ul><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/280140/extras/aldo-promo-256.png?t=1634804885" />
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

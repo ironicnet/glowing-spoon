@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Not For Broadcast</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('425e5009-cb80-4147-a80f-cd221240b9a8/663b2daf-b2e6-4cd3-bf7f-a338185c3610.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src=""/> Not For Broadcast</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="425e5009-cb80-4147-a80f-cd221240b9a8/3024095b-d6b6-4b16-9631-28c0f6f1ee0e.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 14:50:25</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-8/19/2023">8/19/2023</a> 18:59:29</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-1/30/2020">1/30/2020</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="#quicklink-80">80</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="#quicklink-85">85</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Indie">Indie</a><br/><a href="#quicklink-Simulator">Simulator</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="#quicklink-NotGames">NotGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="#quicklink-tinyBuild">tinyBuild</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/1147550" target="_blank">Steam</a><br/><a href="https://www.notforbroadcastgame.com/" target="_blank">Official</a><br/><a href="https://twitter.com/notgamesuk" target="_blank">Twitter</a><br/><a href="https://www.youtube.com/user/tinyBuildGAMES" target="_blank">YouTube</a><br/><a href="https://www.gog.com/game/not_for_broadcast" target="_blank">GOG</a><br/><a href="https://www.epicgames.com/store/en-US/p/not-for-broadcast-7e523f" target="_blank">Epic</a><br/><a href="https://en.wikipedia.org/wiki/Not_For_Broadcast" target="_blank">Wikipedia</a><br/><a href="https://www.facebook.com/notgamesuk" target="_blank">Facebook</a><br/><a href="https://www.instagram.com/notgamesuk" target="_blank">Instagram</a><br/><a href="https://discord.gg/invite/notforbroadcast" target="_blank">Discord</a><br/><a href="https://www.reddit.com/r/NotForBroadcast" target="_blank">Reddit</a><br/><a href="https://notforbroadcast.fandom.com/wiki/Not_For_Broadcast_Wiki" target="_blank">Wikia</a><br/><a href="https://www.twitch.tv/directory/game/Not%20For%20Broadcast" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i>It’s time for the National Nightly News. A nation tunes in, and you get to decide what’s fit for broadcast. Pick the most exciting (or scandalous) camera angles, bleep the swears and determine which ads to run to keep the sponsors happy. No pressure, right? I mean, who pays attention to the news anyway?</i><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1147550/extras/nfb_release_header_1.gif?t=1679929087" /><br><br><strong>Not For Broadcast</strong> is a darkly comedic game of televised chaos that lets you pick what you want to see on TV, no matter what anybody else wants. Egotistical celebrities, dishonest politicians, and strange sponsors clash on the airwaves. You’re here to ensure that the show goes on uninterrupted.<br><br>Cut between multiple camera feeds, tweak the headlines, bleep the foul language, all with just moments to spare on a live broadcast! Whether you toe the party line or stir up a scandal is your choice, so long as you can hold the audience’s fickle attention.<br><br><strong><h2 class="bb_tag">Frame the picture (and the debate)</h2></strong><br>Keep the general public entertained with your editing skills. You are the artist and the broadcast is your canvas.<br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1147550/extras/nfb_release_frame_2.gif?t=1679929087" /><br><br><strong><h2 class="bb_tag">Keep it PG</h2></strong><br>Smash that big red CENSOR button to keep rude words (and other sensitive information) off the air. Keep the news safe for children and oppressive political regimes alike.<br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1147550/extras/nfb_gif_9_1.gif?t=1679929087" /><br><br><strong><h2 class="bb_tag">Hand-pick the headlines</h2></strong><br>There’s more news to see than a single broadcast can possibly contain, so someone (that’s you) gets to choose what goes on air. Frame a footballer as a loving beau or a drunken lout? Your call to make, and just one of many. It’s just TV, right? It’s not like you could change an entire nation’s fate…<br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1147550/extras/nfb_release_headline_1.gif?t=1679929087" /><br><br><strong><h2 class="bb_tag">Cue the ads</h2></strong><br>Powerful as you are, they’re really not paying you enough here. Some hand-picked (if slightly sketchy) sponsors might help pad that bank balance, and provide some laughs along the way. Customer satisfaction is not guaranteed and absolutely no refunds.<br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1147550/extras/nfb_gif_8.gif?t=1679929087" /><br><br><strong><h2 class="bb_tag">The show must go on!</h2></strong><br>Nothing will stop the National Nightly News, not even existential threats! Keep broadcasting no matter how bizarre things get. News stops for no-one, not even a category 5 storm!<br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1147550/extras/nfb_gif_4.gif?t=1679929087" /><br><br><strong><h2 class="bb_tag">Keep them laughing as you go</h2></strong><br>Okay, so the news isn’t all sunshine and celebrity embarrassments. There’s all that talk of war, and the politics are just getting to you. But don’t worry, be happy! Tune out the chaos, turn up the ads, and whatever you do, don’t listen in on the increasingly panicked chatter of the news crew behind the scenes. <i>Everything’s fine.</i><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1147550/extras/nfb_gif_5.gif?t=1679929087" />
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
